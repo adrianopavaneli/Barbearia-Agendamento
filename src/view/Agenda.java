@@ -63,7 +63,7 @@ public class Agenda extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(TableAgendamentos);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 450, 1120, 260));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 450, 1120, 170));
 
         TextFormatedHora.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
         getContentPane().add(TextFormatedHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 400, 280, 40));
@@ -72,7 +72,7 @@ public class Agenda extends javax.swing.JFrame {
         LabelHora.setText("Hora");
         getContentPane().add(LabelHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 410, -1, -1));
 
-        ButtonAgendar.setBackground(new java.awt.Color(60, 233, 106));
+        ButtonAgendar.setBackground(new java.awt.Color(51, 51, 255));
         ButtonAgendar.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         ButtonAgendar.setForeground(new java.awt.Color(255, 255, 255));
         ButtonAgendar.setText("Agendar");
@@ -117,6 +117,11 @@ public class Agenda extends javax.swing.JFrame {
         getContentPane().add(LabelServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, -1, -1));
 
         TextCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alan", "Afonso", "Abigail", "Alexandro" }));
+        TextCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextClienteActionPerformed(evt);
+            }
+        });
         getContentPane().add(TextCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 280, 40));
 
         LabelId.setForeground(new java.awt.Color(255, 255, 255));
@@ -162,6 +167,10 @@ public class Agenda extends javax.swing.JFrame {
     private void TextIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextIdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TextIdActionPerformed
+
+    private void TextClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextClienteActionPerformed
 
     /**
      * @param args the command line arguments
