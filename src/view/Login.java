@@ -26,47 +26,58 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        TxtUsuario = new javax.swing.JTextField();
+        BtnEntrar = new javax.swing.JButton();
+        BtnSenha = new javax.swing.JPasswordField();
+        LblSenha = new javax.swing.JLabel();
+        LblUsuario = new javax.swing.JLabel();
+        LblLogin = new javax.swing.JLabel();
+        LblFundoLogin = new javax.swing.JLabel();
+        LblLoginFundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 170, -1));
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, 170, -1));
+        getContentPane().add(TxtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 170, -1));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton1.setText("Entrar");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, -1, -1));
+        BtnEntrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        BtnEntrar.setText("Entrar");
+        BtnEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEntrarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(BtnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Senha");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, -1, -1));
+        BtnSenha.setText("jPasswordField1");
+        getContentPane().add(BtnSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, 170, -1));
 
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Usúario");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, -1, -1));
+        LblSenha.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        LblSenha.setForeground(new java.awt.Color(255, 255, 255));
+        LblSenha.setText("Senha");
+        getContentPane().add(LblSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Login");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 70, -1));
+        LblUsuario.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        LblUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        LblUsuario.setText("Usúario");
+        getContentPane().add(LblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, -1, -1));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/login.png"))); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
+        LblLogin.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        LblLogin.setForeground(new java.awt.Color(255, 255, 255));
+        LblLogin.setText("Login");
+        getContentPane().add(LblLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 70, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/inicial.jpg"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        LblFundoLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/login.png"))); // NOI18N
+        getContentPane().add(LblFundoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
+
+        LblLoginFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/inicial.jpg"))); // NOI18N
+        getContentPane().add(LblLoginFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BtnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEntrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnEntrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -104,13 +115,13 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JButton BtnEntrar;
+    private javax.swing.JPasswordField BtnSenha;
+    private javax.swing.JLabel LblFundoLogin;
+    private javax.swing.JLabel LblLogin;
+    private javax.swing.JLabel LblLoginFundo;
+    private javax.swing.JLabel LblSenha;
+    private javax.swing.JLabel LblUsuario;
+    private javax.swing.JTextField TxtUsuario;
     // End of variables declaration//GEN-END:variables
 }
