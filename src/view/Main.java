@@ -4,13 +4,14 @@
  */
 package view;
 
+import Model.Agendamento;
 import Model.Cliente;
 import Model.Servico;
 import Model.Usuario;
 
 /**
  *
- * @author Didi
+ * @author Adriano Pavaneli
  */
 public class Main {
     public static void main(String[] args) {
@@ -24,6 +25,9 @@ public class Main {
         
          Usuario usuario = new Usuario(2, "adriano", "1234");
         System.out.println(usuario);
+        
+        Agendamento agendamento = new Agendamento(1, cliente, barba, 30, "22/09/2022 09:15");
+        System.out.println(agendamento);
     }
     
 }
