@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author tiago
+ * @author Adriano Pavaneli
  */
 public class Banco {
     
