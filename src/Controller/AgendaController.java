@@ -28,6 +28,7 @@ public class AgendaController {
         AgendamentoDAO agendamentoDao = new AgendamentoDAO();
         ArrayList<Agendamento> agendamentos = agendamentoDao.selectAll();
         //exibir lista na view
+        helper.preencherTabela(agendamentos);
         
     }
     

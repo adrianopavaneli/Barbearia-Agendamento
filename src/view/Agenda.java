@@ -4,6 +4,10 @@
  */
 package view;
 
+import Controller.AgendaController;
+import Model.DAO.Banco;
+import javax.swing.JTable;
+
 /**
  *
  * @author Adriano Pavaneli
@@ -16,7 +20,8 @@ public class Agenda extends javax.swing.JFrame {
      */
     public Agenda() {
         initComponents();
-        controller = new AgendaController(this);
+        this.controller = new AgendaController(this);
+        Banco.inicia();
         iniciar();
         
     }
@@ -56,10 +61,10 @@ public class Agenda extends javax.swing.JFrame {
 
         TableAgendamentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1", "Alan", "Corte", "10", "22/04/2018", "08:00", ""},
-                {"2", "Abigail", "Barba", "20", "22/04/2018", "09:00", "Pode se Atrazar um pouco"},
-                {"3", "Pedro", "Barba", "20", "23/04/2018", "08:00", null},
-                {"4", "Teste", "Barba + Corte", "30", "23/04/2018", "09:00", null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
                 "Id", "Cliente", "Serviço", "Valor", "Data", "Hora", "Observação"
@@ -237,4 +242,13 @@ public class Agenda extends javax.swing.JFrame {
     private void iniciar() {
         this.controller.atualizaTabela();
     }
+
+    public JTable getTableAgendamentos() {
+        return TableAgendamentos;
+    }
+
+    public void setTableAgendamentos(JTable TableAgendamentos) {
+        this.TableAgendamentos = TableAgendamentos;
+    }
+    
 }
