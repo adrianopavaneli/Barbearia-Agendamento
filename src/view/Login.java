@@ -4,17 +4,27 @@
  */
 package view;
 
+import Controller.LoginController;
+import Model.DAO.Banco;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Didi
  */
 public class Login extends javax.swing.JFrame {
 
+    private final LoginController controller;
+
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
+        controller = new LoginController(this);
+        Banco.inicia();
     }
 
     /**
@@ -28,7 +38,7 @@ public class Login extends javax.swing.JFrame {
 
         TxtUsuario = new javax.swing.JTextField();
         BtnEntrar = new javax.swing.JButton();
-        BtnSenha = new javax.swing.JPasswordField();
+        TxtSenha = new javax.swing.JPasswordField();
         LblSenha = new javax.swing.JLabel();
         LblUsuario = new javax.swing.JLabel();
         LblLogin = new javax.swing.JLabel();
@@ -48,8 +58,8 @@ public class Login extends javax.swing.JFrame {
         });
         getContentPane().add(BtnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, -1, -1));
 
-        BtnSenha.setText("jPasswordField1");
-        getContentPane().add(BtnSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, 170, -1));
+        TxtSenha.setText("1234");
+        getContentPane().add(TxtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, 170, -1));
 
         LblSenha.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         LblSenha.setForeground(new java.awt.Color(255, 255, 255));
@@ -76,7 +86,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEntrarActionPerformed
-        // TODO add your handling code here:
+        this.controller.entrarNoSistema();
     }//GEN-LAST:event_BtnEntrarActionPerformed
 
     /**
@@ -116,12 +126,35 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnEntrar;
-    private javax.swing.JPasswordField BtnSenha;
     private javax.swing.JLabel LblFundoLogin;
     private javax.swing.JLabel LblLogin;
     private javax.swing.JLabel LblLoginFundo;
     private javax.swing.JLabel LblSenha;
     private javax.swing.JLabel LblUsuario;
+    private javax.swing.JPasswordField TxtSenha;
     private javax.swing.JTextField TxtUsuario;
     // End of variables declaration//GEN-END:variables
+
+    public void exibeMensagem(String mensagem) {
+        JOptionPane.showMessageDialog(null, mensagem);
+    }
+
+    public JPasswordField getTxtSenha() {
+        return TxtSenha;
+    }
+
+    public void setTxtSenha(JPasswordField TxtSenha) {
+        this.TxtSenha = TxtSenha;
+    }
+
+    public JTextField getTxtUsuario() {
+        return TxtUsuario;
+    }
+
+    public void setTxtUsuario(JTextField TxtUsuario) {
+        this.TxtUsuario = TxtUsuario;
+    }
+
+
+    
 }
