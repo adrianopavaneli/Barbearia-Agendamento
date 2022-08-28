@@ -46,10 +46,12 @@ public class Cliente extends Pessoa{
 
     @Override
     public String toString() {
-        return "Cliente{" + "endereco=" + endereco + ", cep=" + cep + '}';
+        return getNome();
     }
+    
+    
 
-    
-    
-    
 }
+    
+    
+

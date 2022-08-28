@@ -6,6 +6,7 @@ package view;
 
 import Controller.AgendaController;
 import Model.DAO.Banco;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 
 /**
@@ -118,14 +119,12 @@ public class Agenda extends javax.swing.JFrame {
         });
         getContentPane().add(TextValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 280, 40));
 
-        TextServico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Barba", "Barba + Corte", "Corte", " " }));
         getContentPane().add(TextServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, 280, 40));
 
         LabelServico.setForeground(new java.awt.Color(255, 255, 255));
         LabelServico.setText("Servico");
         getContentPane().add(LabelServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, -1, -1));
 
-        TextCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alan", "Afonso", "Abigail", "Alexandro" }));
         TextCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TextClienteActionPerformed(evt);
@@ -241,6 +240,7 @@ public class Agenda extends javax.swing.JFrame {
 
     private void iniciar() {
         this.controller.atualizaTabela();
+        this.controller.atualizaCliente();
     }
 
     public JTable getTableAgendamentos() {
@@ -250,5 +250,22 @@ public class Agenda extends javax.swing.JFrame {
     public void setTableAgendamentos(JTable TableAgendamentos) {
         this.TableAgendamentos = TableAgendamentos;
     }
+
+    public JComboBox<String> getTextCliente() {
+        return TextCliente;
+    }
+
+    public void setTextCliente(JComboBox<String> TextCliente) {
+        this.TextCliente = TextCliente;
+    }
+
+    public JComboBox<String> getTextServico() {
+        return TextServico;
+    }
+
+    public void setTextServico(JComboBox<String> TextServico) {
+        this.TextServico = TextServico;
+    }
+    
     
 }
