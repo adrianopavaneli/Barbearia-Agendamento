@@ -16,7 +16,7 @@ import view.Agenda;
  *
  * @author Adriano Pavaneli
  */
-public class AgendaHelper {
+public class AgendaHelper implements IHelper{
     private final Agenda view;
 
     public AgendaHelper(Agenda view) {
@@ -63,6 +63,43 @@ public class AgendaHelper {
         }
  
       
+    }
+    public Cliente obterCliente() {
+       return (Cliente)view.getTextCliente().getSelectedItem();
+    }
+
+    public Servico obterServico() {
+       return (Servico)view.getTextServico().getSelectedItem();
+    }
+
+    public void setarValor(float valor) {
+        view.getTextValor().setText(valor + "");
+    }
+
+    @Override
+    public Object obterModelo() {
+        String idString = view.getTextId().getText();
+        int id = Integer.parseInt(idString);
+        Cliente cliente = obterCliente();
+        Servico servico = obterServico();
+        String valorString = view.getTextValor().getText();
+        float valor = Float.parseFloat(valorString);
+        String data = view.getTextFormatedData().getText();
+        String hora = view.getTextFormatedHora().getText();
+        String datahora = data + " " + hora;
+        String observacao = view.getTextObservacao().getText();
+        
+        
+      Agendamento agendamento = new Agendamento(id, cliente, servico, valor, datahora, observacao);
+      return agendamento;
+    }
+
+    @Override
+    public void limpaTela() {
+       view.getTextId().setText("");
+       view.getTextFormatedData().setText("");
+       view.getTextFormatedHora().setText("");
+       view.getTextObservacao().setText("");
     }
   
   

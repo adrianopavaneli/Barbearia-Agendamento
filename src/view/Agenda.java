@@ -7,7 +7,10 @@ package view;
 import Controller.AgendaController;
 import Model.DAO.Banco;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 /**
  *
@@ -39,11 +42,11 @@ public class Agenda extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TableAgendamentos = new javax.swing.JTable();
         TextFormatedHora = new javax.swing.JFormattedTextField();
+        TextFormatedData = new javax.swing.JFormattedTextField();
         LabelHora = new javax.swing.JLabel();
         ButtonAgendar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         TextObservacao = new javax.swing.JTextArea();
-        TextFormatedData = new javax.swing.JFormattedTextField();
         LabelData = new javax.swing.JLabel();
         LabelValor = new javax.swing.JLabel();
         TextValor = new javax.swing.JTextField();
@@ -76,11 +79,14 @@ public class Agenda extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 450, 1120, 170));
 
         TextFormatedHora.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
-        getContentPane().add(TextFormatedHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 400, 280, 40));
+        getContentPane().add(TextFormatedHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 380, 280, 40));
+
+        TextFormatedData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        getContentPane().add(TextFormatedData, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, 280, 40));
 
         LabelHora.setForeground(new java.awt.Color(255, 255, 255));
         LabelHora.setText("Hora");
-        getContentPane().add(LabelHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 410, -1, -1));
+        getContentPane().add(LabelHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 400, -1, -1));
 
         ButtonAgendar.setBackground(new java.awt.Color(51, 51, 255));
         ButtonAgendar.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
@@ -99,9 +105,6 @@ public class Agenda extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 100, 610, 280));
 
-        TextFormatedData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
-        getContentPane().add(TextFormatedData, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 340, 280, 40));
-
         LabelData.setForeground(new java.awt.Color(255, 255, 255));
         LabelData.setText("Data");
         getContentPane().add(LabelData, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, -1, -1));
@@ -119,6 +122,16 @@ public class Agenda extends javax.swing.JFrame {
         });
         getContentPane().add(TextValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 280, 40));
 
+        TextServico.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                TextServicoItemStateChanged(evt);
+            }
+        });
+        TextServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextServicoActionPerformed(evt);
+            }
+        });
         getContentPane().add(TextServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, 280, 40));
 
         LabelServico.setForeground(new java.awt.Color(255, 255, 255));
@@ -165,7 +178,7 @@ public class Agenda extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ButtonAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonAgendarActionPerformed
-        // TODO add your handling code here:
+       this.controller.agendar();
     }//GEN-LAST:event_ButtonAgendarActionPerformed
 
     private void TextValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextValorActionPerformed
@@ -179,6 +192,14 @@ public class Agenda extends javax.swing.JFrame {
     private void TextClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TextClienteActionPerformed
+
+    private void TextServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextServicoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextServicoActionPerformed
+
+    private void TextServicoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TextServicoItemStateChanged
+      this.controller.atualizaValor();
+    }//GEN-LAST:event_TextServicoItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -242,6 +263,7 @@ public class Agenda extends javax.swing.JFrame {
         this.controller.atualizaTabela();
         this.controller.atualizaCliente();
         this.controller.atualizaServico();
+        this.controller.atualizaValor();
     }
 
     public JTable getTableAgendamentos() {
@@ -267,6 +289,47 @@ public class Agenda extends javax.swing.JFrame {
     public void setTextServico(JComboBox<String> TextServico) {
         this.TextServico = TextServico;
     }
+
+    public JTextField getTextValor() {
+        return TextValor;
+    }
+
+    public void setTextValor(JTextField TextValor) {
+        this.TextValor = TextValor;
+    }
+
+    public JFormattedTextField getTextFormatedData() {
+        return TextFormatedData;
+    }
+
+    public void setTextFormatedData(JFormattedTextField TextFormatedData) {
+        this.TextFormatedData = TextFormatedData;
+    }
+
+    public JFormattedTextField getTextFormatedHora() {
+        return TextFormatedHora;
+    }
+
+    public void setTextFormatedHora(JFormattedTextField TextFormatedHora) {
+        this.TextFormatedHora = TextFormatedHora;
+    }
+
+    public JTextField getTextId() {
+        return TextId;
+    }
+
+    public void setTextId(JTextField TextId) {
+        this.TextId = TextId;
+    }
+
+    public JTextArea getTextObservacao() {
+        return TextObservacao;
+    }
+
+    public void setTextObservacao(JTextArea TextObservacao) {
+        this.TextObservacao = TextObservacao;
+    }
+    
     
     
 }

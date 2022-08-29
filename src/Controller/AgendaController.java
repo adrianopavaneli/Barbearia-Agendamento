@@ -5,6 +5,7 @@
 package Controller;
 
 import Controller.Helper.AgendaHelper;
+import Controller.Helper.IHelper;
 import Model.Agendamento;
 import Model.Cliente;
 import Model.DAO.AgendamentoDAO;
@@ -54,6 +55,20 @@ public class AgendaController {
         
         
     }
+     public void atualizaValor(){
+         Servico servico = helper.obterServico();
+         helper.setarValor(servico.getValor());
+     }
+     public void agendar(){
+         Agendamento agendamento = (Agendamento) helper.obterModelo();
+         new AgendamentoDAO().insert(agendamento);
+         atualizaTabela();
+         helper.limpaTela();
+         
+         
+     }
+
+
     
     
     
