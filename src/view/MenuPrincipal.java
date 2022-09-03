@@ -4,7 +4,7 @@
  */
 package view;
 
-import Controller.MenuPrincipalController;
+import controller.MenuPrincipalController;
 
 /**
  *
@@ -47,17 +47,30 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         LblFundoMenuPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/menuprincipal.jpg"))); // NOI18N
 
+        jMenuBar1.setToolTipText("");
+        jMenuBar1.setName(""); // NOI18N
+
         MenuCadastro.setText("Cadastro");
         MenuCadastro.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
         MenuItemCliente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         MenuItemCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/icons/cliente32-icon.png"))); // NOI18N
         MenuItemCliente.setText("Cliente");
+        MenuItemCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemClienteActionPerformed(evt);
+            }
+        });
         MenuCadastro.add(MenuItemCliente);
 
         MenuItemServico.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         MenuItemServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/icons/tesoura32-icon.png"))); // NOI18N
         MenuItemServico.setText("Serviço");
+        MenuItemServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemServicoActionPerformed(evt);
+            }
+        });
         MenuCadastro.add(MenuItemServico);
 
         MenuItemUsuario.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -116,12 +129,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void MenuItemUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemUsuarioActionPerformed
-        // TODO add your handling code here:
+       CadastroUsuarioView telaDeCadastro = new CadastroUsuarioView();
+      telaDeCadastro.setVisible(true);
     }//GEN-LAST:event_MenuItemUsuarioActionPerformed
 
     private void MenuItemAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemAgendaActionPerformed
       this.controller.navegarParaAgenda();
     }//GEN-LAST:event_MenuItemAgendaActionPerformed
+
+    private void MenuItemClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemClienteActionPerformed
+        CadastroClienteView telaDeCadastroCli = new CadastroClienteView();
+        telaDeCadastroCli.setVisible(true);
+    }//GEN-LAST:event_MenuItemClienteActionPerformed
+
+    private void MenuItemServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemServicoActionPerformed
+        CadastroServicoView telaDeCadastroServico = new CadastroServicoView();
+        telaDeCadastroServico.setVisible(true);
+    }//GEN-LAST:event_MenuItemServicoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -148,6 +172,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

@@ -4,9 +4,10 @@
  */
 package view;
 
-import Controller.LoginController;
-import Model.DAO.Banco;
-import javax.swing.JOptionPane;
+import controller.LoginController;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -19,12 +20,12 @@ public class Login extends javax.swing.JFrame {
     private final LoginController controller;
 
     /**
-     * Creates new form Login
+     * Creates new form LoginView
      */
     public Login() {
         initComponents();
         controller = new LoginController(this);
-        Banco.inicia();
+        
     }
 
     /**
@@ -37,45 +38,57 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
 
         TxtUsuario = new javax.swing.JTextField();
-        BtnEntrar = new javax.swing.JButton();
-        TxtSenha = new javax.swing.JPasswordField();
-        LblSenha = new javax.swing.JLabel();
         LblUsuario = new javax.swing.JLabel();
+        LblSenha = new javax.swing.JLabel();
+        BtnEntrar = new javax.swing.JButton();
+        BtnCadastrar = new javax.swing.JButton();
+        TxtSenha = new javax.swing.JPasswordField();
         LblLogin = new javax.swing.JLabel();
         LblFundoLogin = new javax.swing.JLabel();
         LblLoginFundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login");
+        setLocation(new java.awt.Point(550, 120));
+        setMaximumSize(new java.awt.Dimension(337, 500));
+        setMinimumSize(new java.awt.Dimension(337, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(TxtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 170, -1));
+        getContentPane().add(TxtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, 138, -1));
 
-        BtnEntrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        LblUsuario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LblUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        LblUsuario.setText("Usuário:");
+        getContentPane().add(LblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, -1, -1));
+
+        LblSenha.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LblSenha.setForeground(new java.awt.Color(255, 255, 255));
+        LblSenha.setText("Senha:");
+        getContentPane().add(LblSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, -1, -1));
+
         BtnEntrar.setText("Entrar");
         BtnEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnEntrarActionPerformed(evt);
             }
         });
-        getContentPane().add(BtnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, -1, -1));
-        getContentPane().add(TxtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, 170, -1));
+        getContentPane().add(BtnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, 80, -1));
 
-        LblSenha.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        LblSenha.setForeground(new java.awt.Color(255, 255, 255));
-        LblSenha.setText("Senha");
-        getContentPane().add(LblSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, -1, -1));
+        BtnCadastrar.setText("Cadastrar");
+        BtnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCadastrarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(BtnCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, -1, -1));
+        getContentPane().add(TxtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, 138, -1));
 
-        LblUsuario.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        LblUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        LblUsuario.setText("Usúario");
-        getContentPane().add(LblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, -1, -1));
-
-        LblLogin.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        LblLogin.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         LblLogin.setForeground(new java.awt.Color(255, 255, 255));
-        LblLogin.setText("Login");
-        getContentPane().add(LblLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 70, -1));
+        LblLogin.setText("LOGIN");
+        getContentPane().add(LblLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, -1, -1));
 
         LblFundoLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/login.png"))); // NOI18N
-        getContentPane().add(LblFundoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
+        getContentPane().add(LblFundoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
 
         LblLoginFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/inicial.jpg"))); // NOI18N
         getContentPane().add(LblLoginFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -84,8 +97,20 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEntrarActionPerformed
-        this.controller.entrarNoSistema();
+        
+     
+        try {
+            controller.autenticar();
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
     }//GEN-LAST:event_BtnEntrarActionPerformed
+
+    private void BtnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCadastrarActionPerformed
+      CadastroUsuarioView telaDeCadastro = new CadastroUsuarioView();
+      telaDeCadastro.setVisible(true);
+    }//GEN-LAST:event_BtnCadastrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -113,6 +138,7 @@ public class Login extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -120,21 +146,6 @@ public class Login extends javax.swing.JFrame {
                 new Login().setVisible(true);
             }
         });
-    }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnEntrar;
-    private javax.swing.JLabel LblFundoLogin;
-    private javax.swing.JLabel LblLogin;
-    private javax.swing.JLabel LblLoginFundo;
-    private javax.swing.JLabel LblSenha;
-    private javax.swing.JLabel LblUsuario;
-    private javax.swing.JPasswordField TxtSenha;
-    private javax.swing.JTextField TxtUsuario;
-    // End of variables declaration//GEN-END:variables
-
-    public void exibeMensagem(String mensagem) {
-        JOptionPane.showMessageDialog(null, mensagem);
     }
 
     public JPasswordField getTxtSenha() {
@@ -152,7 +163,18 @@ public class Login extends javax.swing.JFrame {
     public void setTxtUsuario(JTextField TxtUsuario) {
         this.TxtUsuario = TxtUsuario;
     }
-
-
     
+    
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnCadastrar;
+    private javax.swing.JButton BtnEntrar;
+    private javax.swing.JLabel LblFundoLogin;
+    private javax.swing.JLabel LblLogin;
+    private javax.swing.JLabel LblLoginFundo;
+    private javax.swing.JLabel LblSenha;
+    private javax.swing.JLabel LblUsuario;
+    private javax.swing.JPasswordField TxtSenha;
+    private javax.swing.JTextField TxtUsuario;
+    // End of variables declaration//GEN-END:variables
 }

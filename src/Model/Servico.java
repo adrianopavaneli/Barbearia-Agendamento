@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Model;
+package model;
 
 /**
  *
@@ -11,10 +11,15 @@ package Model;
 public class Servico {
     private int id;
     private String descricao;
-    private float valor;
+    private double valor;
 
-    public Servico(int id, String descricao, float valor) {
+    public Servico(int id, String descricao, double valor) {
         this.id = id;
+        this.descricao = descricao;
+        this.valor = valor;
+    }
+
+    public Servico(String descricao, double valor) {
         this.descricao = descricao;
         this.valor = valor;
     }
@@ -29,7 +34,7 @@ public class Servico {
         this.descricao = descricao;
     }
 
-    public float getValor() {
+    public double getValor() {
         return valor;
     }
 
@@ -50,9 +55,7 @@ public class Servico {
         return getDescricao();
     }
 
-    
-
-    
+       
     
     
 }

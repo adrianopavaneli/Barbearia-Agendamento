@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DAO;
+package dao;
 
-import Model.Cliente;
-import Model.Usuario;
+import model.Cliente;
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,12 +26,16 @@ public class ClienteDAO {
      
 public void insert(Cliente cliente) throws SQLException{
                    
-        String sql = "insert into cliente(nome,endereco,cep) values(?,?,?)";
+        String sql = "insert into cliente(nome,endereco,cep,telefone,email,rg) values(?,?,?,?,?,?)";
         PreparedStatement statement = connection.prepareStatement(sql);
         
         statement.setString(1, cliente.getNome());
         statement.setString(2, cliente.getEndereco());
-        statement.setString(2, cliente.getCep());
+        statement.setString(3, cliente.getCep());
+        statement.setString(4, cliente.getTelefone());
+        statement.setString(5, cliente.getEmail());
+        statement.setString(6, cliente.getRg());
+        
         statement.execute();           
             
         

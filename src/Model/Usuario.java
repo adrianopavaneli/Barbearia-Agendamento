@@ -2,20 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Model;
-
-
+package model;
 
 /**
  *
- * @author Adriano Pavaneli
+ * @author Didi
  */
 public class Usuario {
     private int id;
     private String usuario;
     private String senha;
 
-    public Usuario(int id, String usuario, String senha) {
+    public Usuario(int id,String usuario, String senha) {
         this.id = id;
         this.usuario = usuario;
         this.senha = senha;
@@ -25,6 +23,11 @@ public class Usuario {
         this.usuario = usuario;
         this.senha = senha;
     }
+
+    public Usuario() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
 
     public int getId() {
         return id;
@@ -49,14 +52,7 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
-    @Override
-    public String toString() {
-        return "Usuario{" + "id=" + id + ", usuario=" + usuario + ", senha=" + senha + '}';
-    }
     
-
-
-  
+    
     
 }

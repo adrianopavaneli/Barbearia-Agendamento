@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Model;
+package model;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -39,6 +39,27 @@ public class Cliente {
         this.rg = rg;
         this.endereco = endereco;
         this.cep = cep;
+    }
+
+    public Cliente(String nome, String endereco, String cep, String telefone) {
+        this.nome = nome;
+        this.endereco = endereco;
+        this.cep = cep;
+        this.telefone = telefone;
+    }
+
+    public Cliente(String nome, String telefone, String email, String rg, String endereco, String cep) {
+        this.nome = nome;        
+        this.telefone = telefone;
+        this.email = email;
+        this.rg = rg;
+        this.endereco = endereco;
+        this.cep = cep;
+    }
+    
+    
+    public Cliente(){
+        
     }
 
    

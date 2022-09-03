@@ -2,48 +2,53 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Controller;
+package controller;
 
-import Controller.Helper.LoginHelper;
-import Model.Usuario;
+import dao.Conexao;
+import dao.UsuarioDAO;
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
+import model.Usuario;
+
 import view.Login;
-import Controller.LoginController;
-import Model.DAO.UsuarioDAO;
 import view.MenuPrincipal;
+
 
 /**
  *
- * @author Adriano Pavaneli
+ * @author Didi
  */
 public class LoginController {
-
-    private final Login view;
-    private final LoginHelper helper;
+    private Login view;
 
     public LoginController(Login view) {
         this.view = view;
-        this.helper = new LoginHelper(view);
+    }
+
+    public void autenticar() throws SQLException {
+      String usuario = view.getTxtUsuario().getText();
+      String senha = view.getTxtSenha().getText();
+      
+      Usuario usuarioAutenticar = new Usuario(usuario, senha);
+      
+    
+            Connection conexao = new Conexao().getConnection();
+            UsuarioDAO usuarioDao = new UsuarioDAO(conexao);
+            boolean existe = usuarioDao.autenticarUsuario(usuarioAutenticar);
+            if(existe){
+              MenuPrincipal telaDeMenu = new MenuPrincipal();
+              telaDeMenu.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(null, "Usuario e senha incorretos");
+            }
+       
+      
+      
+//     telaDeMenu.setVisible(true);
     }
     
-    public void entrarNoSistema(){
-        //Pegar um usuario na view
-        Usuario usuario = helper.obterModelo();
-        
-        //Pesquisar usuario no banco
-        UsuarioDAO usuarioDao = new UsuarioDAO();
-        Usuario usuarioAutenticado = usuarioDao.selectPorNomeESenha(usuario);
-        if(usuarioAutenticado != null){
-            MenuPrincipal menu = new MenuPrincipal();
-            menu.setVisible(true);
-            this.view.dispose();
-        }else{
-            view.exibeMensagem("Usuário ou senha incorretos!");
-        }
-    }
     
-    public void fizTarefa(){
-        System.out.println("Busquei algo no meu banco de dados");
-        this.view.exibeMensagem("Executei o fiz tarefa");
-    }
     
 }
