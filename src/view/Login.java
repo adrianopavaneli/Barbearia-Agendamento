@@ -57,8 +57,6 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BtnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, -1, -1));
-
-        TxtSenha.setText("1234");
         getContentPane().add(TxtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, 170, -1));
 
         LblSenha.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N

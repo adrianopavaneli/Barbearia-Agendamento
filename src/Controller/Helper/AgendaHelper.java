@@ -96,7 +96,7 @@ public class AgendaHelper implements IHelper{
 
     @Override
     public void limpaTela() {
-       view.getTextId().setText("");
+       view.getTextId().setText("0");
        view.getTextFormatedData().setText("");
        view.getTextFormatedHora().setText("");
        view.getTextObservacao().setText("");
