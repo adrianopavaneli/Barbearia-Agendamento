@@ -83,7 +83,7 @@ public class UsuarioDAO {
      * @return verdadeiro caso sejam iguais e falso caso nao forem iguais
      */
     private boolean nomeESenhaSaoIguais(Usuario usuario, Usuario usuarioAPesquisar) {
-        return usuario.getNome().equals(usuarioAPesquisar.getNome()) && usuario.getSenha().equals(usuarioAPesquisar.getSenha());
+        return usuario.getUsuario().equals(usuarioAPesquisar.getUsuario()) && usuario.getSenha().equals(usuarioAPesquisar.getSenha());
     }
 
     /**

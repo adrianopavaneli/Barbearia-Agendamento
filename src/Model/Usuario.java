@@ -4,28 +4,42 @@
  */
 package Model;
 
-import java.util.Date;
+
 
 /**
  *
  * @author Adriano Pavaneli
  */
-public class Usuario extends Pessoa{
-    
+public class Usuario {
+    private int id;
+    private String usuario;
     private String senha;
-    private String nivelAcesso;
 
-    public Usuario(int id, String nome, String senha) {
-        super(id, nome);
+    public Usuario(int id, String usuario, String senha) {
+        this.id = id;
+        this.usuario = usuario;
         this.senha = senha;
     }
 
-    
-    
-    public Usuario(int id, String nome, char sexo, String dataNascimento, String telefone, String email, String rg, String senha, String nivelAcesso) {
-        super(id, nome, sexo, dataNascimento, telefone, email, rg);
+    public Usuario(String usuario, String senha) {
+        this.usuario = usuario;
         this.senha = senha;
-        this.nivelAcesso = nivelAcesso;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public String getSenha() {
@@ -36,18 +50,13 @@ public class Usuario extends Pessoa{
         this.senha = senha;
     }
 
-    public String getNivelAcesso() {
-        return nivelAcesso;
-    }
-
-    public void setNivelAcesso(String nivelAcesso) {
-        this.nivelAcesso = nivelAcesso;
-    }
-
     @Override
     public String toString() {
-        return "Usuario{" + "senha=" + senha + ", nivelAcesso=" + nivelAcesso + '}';
+        return "Usuario{" + "id=" + id + ", usuario=" + usuario + ", senha=" + senha + '}';
     }
+    
 
+
+  
     
 }

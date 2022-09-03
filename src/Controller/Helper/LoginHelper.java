@@ -27,7 +27,7 @@ public class LoginHelper implements IHelper {
 
     
     public void setarModelo(Usuario modelo){
-        String nome = modelo.getNome();
+        String nome = modelo.getUsuario();
         String senha = modelo.getSenha();
         view.getTxtUsuario().setText(nome);
         view.getTxtSenha().setText(senha);
