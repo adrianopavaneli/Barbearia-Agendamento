@@ -11,7 +11,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.sql.Date;
+import java.text.ParseException;
+import java.util.Formatter;
 
 /**
  *
@@ -20,13 +24,15 @@ import java.util.ArrayList;
 public class ClienteDAO {
     private final Connection connection;
     
+    
      public ClienteDAO(Connection connection){
         this.connection = connection;
+        
     }
      
-public void insert(Cliente cliente) throws SQLException{
+public void insert(Cliente cliente) throws SQLException, ParseException{
                    
-        String sql = "insert into cliente(nome,endereco,cep,telefone,email,rg) values(?,?,?,?,?,?)";
+        String sql = "insert into cliente(nome,endereco,cep,telefone,email,rg,datanascimento,sexo) values(?,?,?,?,?,?,?,?)";
         PreparedStatement statement = connection.prepareStatement(sql);
         
         statement.setString(1, cliente.getNome());
@@ -35,6 +41,16 @@ public void insert(Cliente cliente) throws SQLException{
         statement.setString(4, cliente.getTelefone());
         statement.setString(5, cliente.getEmail());
         statement.setString(6, cliente.getRg());
+        
+        java.util.Date dataUtil = new java.util.Date();
+        dataUtil = cliente.getDataNascimento();
+        java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime());
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");            
+        statement.setDate(7, dataSql);
+        statement.setString(8, cliente.getSexo());
+        
+       
+
         
         statement.execute();           
             
@@ -53,7 +69,7 @@ public void insert(Cliente cliente) throws SQLException{
         statement.execute();
     }
 
-public void insertOuUpdate(Cliente cliente) throws SQLException{
+public void insertOuUpdate(Cliente cliente) throws SQLException, ParseException{
          if(cliente.getId() > 0){
              update(cliente);
              

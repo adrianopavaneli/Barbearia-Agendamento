@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 public class Cliente {
     private int id;
     private String nome;
-    private char sexo;
+    private String sexo;
     private Date dataNascimento;
     private String telefone;
     private String email;
@@ -25,7 +25,7 @@ public class Cliente {
     private String endereco;
     private String cep;
 
-    public Cliente(int id, String nome, char sexo,String dataNascimento, String telefone, String email, String rg, String endereco, String cep) {
+    public Cliente(int id, String nome, String sexo,String dataNascimento, String telefone, String email, String rg, String endereco, String cep) {
         this.id = id;
         this.nome = nome;
         this.sexo = sexo;
@@ -48,13 +48,16 @@ public class Cliente {
         this.telefone = telefone;
     }
 
-    public Cliente(String nome, String telefone, String email, String rg, String endereco, String cep) {
+    public Cliente(String nome, String telefone, String email, String rg, String endereco, String cep, Date dataNascimento, String sexo) {
         this.nome = nome;        
         this.telefone = telefone;
         this.email = email;
         this.rg = rg;
         this.endereco = endereco;
         this.cep = cep;
+        this.dataNascimento = dataNascimento;
+        this.sexo = sexo;
+        
     }
     
     
@@ -87,11 +90,11 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public char getSexo() {
+    public String getSexo() {
         return sexo;
     }
 
-    public void setSexo(char sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 

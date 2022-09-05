@@ -18,7 +18,7 @@ import view.MenuPrincipal;
 
 /**
  *
- * @author Didi
+ * @author Adriano Pavaneli
  */
 public class LoginController {
     private Login view;

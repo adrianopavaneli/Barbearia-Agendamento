@@ -75,7 +75,7 @@ public class ServicoDAO {
         while(resultSet.next()){
             int id = resultSet.getInt("id");
             String descricao = resultSet.getString("descricao");
-            Float valor = resultSet.getFloat("valor");
+            double valor = resultSet.getDouble("valor");
             
             Servico servicoComDados = new Servico(id, descricao, valor);
             servicos.add(servicoComDados);

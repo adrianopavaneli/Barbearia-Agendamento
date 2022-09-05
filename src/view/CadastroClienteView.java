@@ -6,6 +6,10 @@ package view;
 
 import controller.CadastroClienteController;
 import controller.CadastroUsuarioController;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFormattedTextField;
 
 import javax.swing.JTextField;
 
@@ -50,14 +54,14 @@ public class CadastroClienteView extends javax.swing.JFrame {
         LblCep = new javax.swing.JLabel();
         TxtCadCliCep = new javax.swing.JTextField();
         LblTelefone = new javax.swing.JLabel();
-        TxtCadCliTelefone = new javax.swing.JTextField();
+        TxtCadCliTelefone = new javax.swing.JFormattedTextField();
         LblEmail = new javax.swing.JLabel();
         TxtCadCliEmail = new javax.swing.JTextField();
         LblSexo = new javax.swing.JLabel();
         TxtCadcliSexo = new javax.swing.JTextField();
         LblNascimento = new javax.swing.JLabel();
-        TxtCadCliNascimento = new javax.swing.JTextField();
         BtnSalvar = new javax.swing.JButton();
+        TxtCadCliNascimento = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Clientes");
@@ -75,6 +79,12 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
         LblTelefone.setText("Telefone:");
 
+        try {
+            TxtCadCliTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         LblEmail.setText("Email:");
 
         LblSexo.setText("Sexo(M/F):");
@@ -87,6 +97,12 @@ public class CadastroClienteView extends javax.swing.JFrame {
                 BtnSalvarActionPerformed(evt);
             }
         });
+
+        try {
+            TxtCadCliNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,8 +136,8 @@ public class CadastroClienteView extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(LblTelefone)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(TxtCadCliTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(TxtCadCliEndereco)
+                                    .addComponent(TxtCadCliTelefone))
+                                .addComponent(TxtCadCliEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
                                 .addComponent(TxtCadCliNome)
                                 .addComponent(TxtCadCliEmail)))
                         .addGroup(layout.createSequentialGroup()
@@ -129,10 +145,10 @@ public class CadastroClienteView extends javax.swing.JFrame {
                             .addComponent(LblSexo)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(TxtCadcliSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGap(51, 51, 51)
                             .addComponent(LblNascimento)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(TxtCadCliNascimento))))
+                            .addComponent(TxtCadCliNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -177,7 +193,12 @@ public class CadastroClienteView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalvarActionPerformed
-      controller.salvaCliente();
+        
+        try {
+            controller.salvaCliente();
+        } catch (ParseException ex) {
+            Logger.getLogger(CadastroClienteView.class.getName()).log(Level.SEVERE, null, ex);
+        }
       
       
         
@@ -255,13 +276,17 @@ public class CadastroClienteView extends javax.swing.JFrame {
         this.TxtCadCliId = TxtCadCliId;
     }
 
-    public JTextField getTxtCadCliNascimento() {
+    public JFormattedTextField getTxtCadCliNascimento() {
         return TxtCadCliNascimento;
     }
 
-    public void setTxtCadCliNascimento(JTextField TxtCadCliNascimento) {
+  
+
+    public void setTxtCadCliNascimento(JFormattedTextField TxtCadCliNascimento) {
         this.TxtCadCliNascimento = TxtCadCliNascimento;
     }
+
+    
 
     public JTextField getTxtCadCliNome() {
         return TxtCadCliNome;
@@ -279,13 +304,16 @@ public class CadastroClienteView extends javax.swing.JFrame {
         this.TxtCadCliRg = TxtCadCliRg;
     }
 
-    public JTextField getTxtCadCliTelefone() {
+    public JFormattedTextField getTxtCadCliTelefone() {
         return TxtCadCliTelefone;
     }
 
-    public void setTxtCadCliTelefone(JTextField TxtCadCliTelefone) {
+    public void setTxtCadCliTelefone(JFormattedTextField TxtCadCliTelefone) {
         this.TxtCadCliTelefone = TxtCadCliTelefone;
     }
+
+  
+    
 
     public JTextField getTxtCadcliSexo() {
         return TxtCadcliSexo;
@@ -313,10 +341,10 @@ public class CadastroClienteView extends javax.swing.JFrame {
     private javax.swing.JTextField TxtCadCliEmail;
     private javax.swing.JTextField TxtCadCliEndereco;
     private javax.swing.JTextField TxtCadCliId;
-    private javax.swing.JTextField TxtCadCliNascimento;
+    private javax.swing.JFormattedTextField TxtCadCliNascimento;
     private javax.swing.JTextField TxtCadCliNome;
     private javax.swing.JTextField TxtCadCliRg;
-    private javax.swing.JTextField TxtCadCliTelefone;
+    private javax.swing.JFormattedTextField TxtCadCliTelefone;
     private javax.swing.JTextField TxtCadcliSexo;
     // End of variables declaration//GEN-END:variables
 }

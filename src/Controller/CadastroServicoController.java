@@ -15,11 +15,11 @@ import javax.swing.JOptionPane;
 import model.Servico;
 
 import view.CadastroServicoView;
-import view.CadastroUsuarioView;
+
 
 /**
  *
- * @author Didi
+ * @author Adriano Pavaneli
  */
 public class CadastroServicoController {
     private CadastroServicoView view;

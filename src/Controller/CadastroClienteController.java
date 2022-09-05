@@ -9,6 +9,9 @@ import dao.Conexao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -19,7 +22,7 @@ import view.CadastroClienteView;
 
 /**
  *
- * @author Didi
+ * @author Adriano Pavaneli
  */
 public class CadastroClienteController {
     private CadastroClienteView view;
@@ -28,8 +31,11 @@ public class CadastroClienteController {
         this.view = view;
     }
     
-    public void salvaCliente(){
-        Cliente cliente = new Cliente(view.getTxtCadCliNome().getText() ,view.getTxtCadCliTelefone().getText(),view.getTxtCadCliEmail().getText(),view.getTxtCadCliRg().getText(),view.getTxtCadCliEndereco().getText(), view.getTxtCadCliCep().getText());
+    public void salvaCliente() throws ParseException{
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date dataFormatada = formatter.parse(view.getTxtCadCliNascimento().getText());
+        
+        Cliente cliente = new Cliente(view.getTxtCadCliNome().getText() ,view.getTxtCadCliTelefone().getText(),view.getTxtCadCliEmail().getText(),view.getTxtCadCliRg().getText(),view.getTxtCadCliEndereco().getText(), view.getTxtCadCliCep().getText(), dataFormatada, view.getTxtCadcliSexo().getText());
         
         try {
             Connection conexao = new Conexao().getConnection();
