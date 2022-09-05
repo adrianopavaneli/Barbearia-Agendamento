@@ -6,7 +6,7 @@ package model;
 
 /**
  *
- * @author Didi
+ * @author Adriano Pavaneli
  */
 public class Usuario {
     private int id;

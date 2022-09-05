@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author Didi
+ * @author Adriano Pavaneli
  */
 public class Login extends javax.swing.JFrame {
 
@@ -41,7 +41,6 @@ public class Login extends javax.swing.JFrame {
         LblUsuario = new javax.swing.JLabel();
         LblSenha = new javax.swing.JLabel();
         BtnEntrar = new javax.swing.JButton();
-        BtnCadastrar = new javax.swing.JButton();
         TxtSenha = new javax.swing.JPasswordField();
         LblLogin = new javax.swing.JLabel();
         LblFundoLogin = new javax.swing.JLabel();
@@ -72,14 +71,6 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BtnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, 80, -1));
-
-        BtnCadastrar.setText("Cadastrar");
-        BtnCadastrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnCadastrarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(BtnCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, -1, -1));
         getContentPane().add(TxtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, 138, -1));
 
         LblLogin.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
@@ -106,11 +97,6 @@ public class Login extends javax.swing.JFrame {
         }
       
     }//GEN-LAST:event_BtnEntrarActionPerformed
-
-    private void BtnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCadastrarActionPerformed
-      CadastroUsuarioView telaDeCadastro = new CadastroUsuarioView();
-      telaDeCadastro.setVisible(true);
-    }//GEN-LAST:event_BtnCadastrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,7 +153,6 @@ public class Login extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnCadastrar;
     private javax.swing.JButton BtnEntrar;
     private javax.swing.JLabel LblFundoLogin;
     private javax.swing.JLabel LblLogin;

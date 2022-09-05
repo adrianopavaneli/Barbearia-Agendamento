@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author Didi
+ * @authorAdriano Pavaneli
  */
 public class CadastroClienteView extends javax.swing.JFrame {
 

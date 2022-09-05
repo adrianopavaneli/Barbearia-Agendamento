@@ -8,6 +8,7 @@ import model.Agendamento;
 import model.Cliente;
 import model.Servico;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import view.Agenda;
@@ -37,10 +38,10 @@ public class AgendaHelper implements IHelper{
             new Object[]{
              agendamento.getId(),
              agendamento.getCliente().getNome(),
-//             agendamento.getServico().getDescricao(),
+             agendamento.getServico().getDescricao(),
              agendamento.getValor(),
-//             agendamento.getDataFormatada(),
-//             agendamento.getHoraFormatada(),
+             agendamento.getDataFormatada(),
+             agendamento.getHoraFormatada(),
              agendamento.getObservacao()
              
              
@@ -87,10 +88,11 @@ public class AgendaHelper implements IHelper{
         String data = view.getTextFormatedData().getText();
         String hora = view.getTextFormatedHora().getText();
         String datahora = data + " " + hora;
+        Date datapronta = new Date(datahora);
         String observacao = view.getTextObservacao().getText();
         
         
-      Agendamento agendamento = new Agendamento(id, cliente, servico, valor, datahora, observacao);
+      Agendamento agendamento = new Agendamento(id, cliente, servico, valor, datapronta, observacao);
       return agendamento;
     }
 

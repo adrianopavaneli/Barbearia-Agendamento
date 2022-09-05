@@ -4,7 +4,7 @@
  */
 package model;
 
-import java.security.Timestamp;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,10 +36,16 @@ public class Agendamento {
         }
     }
 
-   public Agendamento(int id, Cliente cliente, Servico servico, double valor, String data, String observacao){
-      this(id,cliente,servico,valor,data);
-      this.observacao = observacao;
-   }
+    public Agendamento(int id, Cliente cliente, Servico servico, double valor, Date data, String observacao) {
+        this.id = id;
+        this.cliente = cliente;
+        this.servico = servico;
+        this.valor = valor;
+        this.data = data;
+        this.observacao = observacao;
+    }
+
+   
 
     public Agendamento(int id, double valor, Date data, String observacao) {
         this.id = id;
@@ -48,16 +54,7 @@ public class Agendamento {
         this.observacao = observacao;
     }
 
-    public Agendamento(int id, Cliente cliente, double valor, String observacao) {
-        this.id = id;
-        this.valor = valor;
-        this.observacao = observacao;
-        this.cliente = cliente;
-    }
-    
-
-  
-    
+   
     public int getId() {
         return id;
     }

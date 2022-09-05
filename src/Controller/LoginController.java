@@ -43,10 +43,7 @@ public class LoginController {
             }else{
                 JOptionPane.showMessageDialog(null, "Usuario e senha incorretos");
             }
-       
-      
-      
-//     telaDeMenu.setVisible(true);
+
     }
     
     

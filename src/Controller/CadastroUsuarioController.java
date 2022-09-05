@@ -16,7 +16,7 @@ import view.CadastroUsuarioView;
 
 /**
  *
- * @author Didi
+ * @author Adriano Pavaneli
  */
 public class CadastroUsuarioController {
     private CadastroUsuarioView view;

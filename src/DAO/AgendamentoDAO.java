@@ -5,19 +5,15 @@
  */
 package dao;
 
-import java.security.Timestamp;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import model.Agendamento;
 import java.util.ArrayList;
-import java.util.Date;
 import model.Cliente;
-import model.Usuario;
+import model.Servico;
+
 
 
 /**
@@ -36,7 +32,7 @@ public class AgendamentoDAO {
     
      
      public ArrayList<Agendamento> selectAll() throws SQLException{
-        String sql = "select p.id as pid, valor, dataagenda, observacao, id_cliente, id_servico, c.id as cid, nome from agendamento p inner join cliente c ON c.id = p.id_cliente;";
+        String sql = "select p.id as pid, p.valor as pvalor, dataagenda, observacao, id_cliente, id_servico, c.id as cid, nome, sexo, datanascimento, telefone, email, rg, endereco, cep, s.id as sid, descricao, s.valor as svalor from agendamento p inner join cliente c ON c.id = p.id_cliente inner join servico s on s.id = p.id_servico";
         PreparedStatement statement = connection.prepareStatement(sql);
         return pesquisa(statement);        
         
@@ -48,19 +44,16 @@ public class AgendamentoDAO {
         
         while(resultSet.next()){
             int id = resultSet.getInt("pid");
-            double valor = resultSet.getDouble("valor");
+            double valor = resultSet.getDouble("pvalor");
             Cliente cliente = new Cliente();
             cliente.setId(resultSet.getInt("cid"));
-            cliente.setNome(resultSet.getString("nome"));
-            
-            String cliente1 = resultSet.getString("nome");
-//            Date dataagenda = resultSet.getDate("dataagenda");
-//            SimpleDateFormat stf = new SimpleDateFormat("dd/MM/yyyy");
-//            Date dataformatada = stf.parse(dataagenda);
-            
-            String observacao = resultSet.getString("observacao");
-                        
-            Agendamento agendamentoComDados = new Agendamento(id, cliente,valor, observacao);
+            cliente.setNome(resultSet.getString("nome"));            
+            Servico servico = new Servico();
+            servico.setId(resultSet.getInt("sid"));
+            servico.setDescricao(resultSet.getString("descricao"));
+            java.sql.Timestamp dataagenda = resultSet.getTimestamp("dataagenda");            
+            String observacao = resultSet.getString("observacao");                        
+            Agendamento agendamentoComDados = new Agendamento(id, cliente, servico,valor,dataagenda, observacao);
             agendamentos.add(agendamentoComDados);
         }
         return agendamentos;
@@ -91,22 +84,7 @@ public class AgendamentoDAO {
         
     }
     
-    /**
-     * Atualiza um Objeto no banco de dados
-     * @param agendamento
-     * @return 
-     */
-//    public boolean update(Agendamento agendamento){
-        
-//        for (int i = 0; i < Banco.agendamento.size(); i++) {
-//            if(idSaoIguais(Banco.agendamento.get(i),agendamento)){
-//                Banco.agendamento.set(i, agendamento);
-//                return true;
-//            }
-//        }
-//        return false;      
-
-//    }
+   
     
     /**
      * Deleta um objeto do banco de dados pelo id do agendamento passado

@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author Didi
+ * @author Adriano Pavaneli
  */
 public class CadastroServicoView extends javax.swing.JFrame {
 

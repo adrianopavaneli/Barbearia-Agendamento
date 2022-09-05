@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author Didi
+ * @author Adriano Pavaneli
  */
 public class CadastroUsuarioView extends javax.swing.JFrame {
 

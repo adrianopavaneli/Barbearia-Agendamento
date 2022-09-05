@@ -40,18 +40,13 @@ public void insert(Cliente cliente) throws SQLException, ParseException{
         statement.setString(3, cliente.getCep());
         statement.setString(4, cliente.getTelefone());
         statement.setString(5, cliente.getEmail());
-        statement.setString(6, cliente.getRg());
-        
+        statement.setString(6, cliente.getRg());        
         java.util.Date dataUtil = new java.util.Date();
         dataUtil = cliente.getDataNascimento();
         java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime());
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");            
         statement.setDate(7, dataSql);
-        statement.setString(8, cliente.getSexo());
-        
-       
-
-        
+        statement.setString(8, cliente.getSexo());        
         statement.execute();           
             
         
