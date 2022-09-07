@@ -21,6 +21,7 @@ public class Agendamento {
     private Servico servico;
     private double valor;
     private Date data;
+    private boolean ativo;
     
     private String observacao;
 
@@ -43,6 +44,7 @@ public class Agendamento {
         this.valor = valor;
         this.data = data;
         this.observacao = observacao;
+        
     }
 
    
@@ -64,6 +66,15 @@ public class Agendamento {
         this.id = id;
     }
 
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    
     public Cliente getCliente() {
         return cliente;
     }

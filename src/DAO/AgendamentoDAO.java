@@ -28,11 +28,21 @@ public class AgendamentoDAO {
         this.connection = connection;
         
     }
-
+     
+     public void atualizaDataAgendamento() throws SQLException{
+        String sql = "UPDATE  agendamento SET ativo = true WHERE dataagenda > '2022-09-07 08:00:00'";
+        PreparedStatement statement = connection.prepareStatement(sql);
+//        statement.setString(1, cliente.getNome());
+//        statement.setString(2, cliente.getEndereco());
+//        statement.setString(3, cliente.getCep());
+//        
+//        statement.setInt(4, cliente.getId());
+        statement.execute();
+    }
     
      
      public ArrayList<Agendamento> selectAll() throws SQLException{
-        String sql = "select p.id as pid, p.valor as pvalor, dataagenda, observacao, id_cliente, id_servico, c.id as cid, nome, sexo, datanascimento, telefone, email, rg, endereco, cep, s.id as sid, descricao, s.valor as svalor from agendamento p inner join cliente c ON c.id = p.id_cliente inner join servico s on s.id = p.id_servico";
+        String sql = "select p.id as pid, p.valor as pvalor, dataagenda, observacao, id_cliente, id_servico,ativo, c.id as cid, nome, sexo, datanascimento, telefone, email, rg, endereco, cep, s.id as sid, descricao, s.valor as svalor from agendamento p inner join cliente c ON c.id = p.id_cliente inner join servico s on s.id = p.id_servico where ativo = true order by dataagenda";
         PreparedStatement statement = connection.prepareStatement(sql);
         return pesquisa(statement);        
         
@@ -52,7 +62,8 @@ public class AgendamentoDAO {
             servico.setId(resultSet.getInt("sid"));
             servico.setDescricao(resultSet.getString("descricao"));
             java.sql.Timestamp dataagenda = resultSet.getTimestamp("dataagenda");            
-            String observacao = resultSet.getString("observacao");                        
+            String observacao = resultSet.getString("observacao");
+            
             Agendamento agendamentoComDados = new Agendamento(id, cliente, servico,valor,dataagenda, observacao);
             agendamentos.add(agendamentoComDados);
         }
@@ -66,7 +77,7 @@ public class AgendamentoDAO {
      
      public void insert(Agendamento agendamento) throws SQLException{
                    
-        String sql = "insert into agendamento(valor,dataagenda,observacao,id_cliente,id_servico) values(?,?,?,?,?)";
+        String sql = "insert into agendamento(valor,dataagenda,observacao,id_cliente,id_servico,ativo) values(?,?,?,?,?,true)";
         PreparedStatement statement = connection.prepareStatement(sql);        
         statement.setDouble(1, agendamento.getValor());         
         java.util.Date dataUtil = new java.util.Date();

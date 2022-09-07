@@ -13,9 +13,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.sql.Date;
+
 import java.text.ParseException;
-import java.util.Formatter;
+
 
 /**
  *

@@ -284,10 +284,12 @@ public class Agenda extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void iniciar() throws SQLException {
+        this.controller.atualizaData();
         this.controller.atualizaTabela();
         this.controller.atualizaCliente();
         this.controller.atualizaServico();
         this.controller.atualizaValor();
+        
     }
 
     public JTable getTableAgendamentos() {

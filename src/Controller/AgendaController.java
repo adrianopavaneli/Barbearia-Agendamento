@@ -85,7 +85,7 @@ public class AgendaController {
          helper.setarValor(servico.getValor());
          
          }
-         
+     
           
           
         
@@ -105,6 +105,13 @@ public class AgendaController {
 //         
          
      }
+         public void atualizaData() throws SQLException{
+         Connection conexao = new Conexao().getConnection();         
+         new AgendamentoDAO(conexao).atualizaDataAgendamento();
+
+       
+         
+     } 
 
 
     

@@ -41,12 +41,14 @@ public class CadastroUsuarioController {
         
     }
     public void salvaUsuario(){
-        Usuario usuario = new Usuario(view.getTxtCadUsuario().getText() ,view.getTxtCadSenha().getText());
+        int id = Integer.parseInt(view.getTxtCadId().getText());
+        
+        Usuario usuario = new Usuario(id ,view.getTxtCadUsuario().getText() ,view.getTxtCadSenha().getText());
         
         try {
             Connection conexao = new Conexao().getConnection();
             UsuarioDAO usuarioDao = new UsuarioDAO(conexao);
-            usuarioDao.insert(usuario);
+            usuarioDao.insertOuUpdate(usuario);
             atualizaTabela();
             helper.limpaTela();
             JOptionPane.showMessageDialog(null, "Usuario salvo com sucesso!");
@@ -56,5 +58,17 @@ public class CadastroUsuarioController {
             
         }
     }
+        
+      public void deletaUsuario() throws SQLException{
+          int id = Integer.parseInt(view.getTxtCadId().getText());
+        Usuario usuario = new Usuario(id ,view.getTxtCadUsuario().getText(),view.getTxtCadSenha().getText());
+          
+           Connection conexao = new Conexao().getConnection();
+            UsuarioDAO usuarioDao = new UsuarioDAO(conexao);
+            usuarioDao.delete(usuario);
+            atualizaTabela();
+            
+        }  
+    }
     
-}
+
