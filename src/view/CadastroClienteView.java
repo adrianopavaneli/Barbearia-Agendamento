@@ -5,11 +5,13 @@
 package view;
 
 import controller.CadastroClienteController;
-import controller.CadastroUsuarioController;
+
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
+import javax.swing.JTable;
 
 import javax.swing.JTextField;
 
@@ -26,11 +28,12 @@ public class CadastroClienteView extends javax.swing.JFrame {
     /**
      * Creates new form FormCadastroView
      */
-    public CadastroClienteView() {
+    public CadastroClienteView() throws SQLException {
         initComponents();
         controller = new CadastroClienteController(this);
         TxtCadCliId.setEnabled(false);
         TxtCadCliNome.setFocusable(true);
+        Iniciar();
         
     }
 
@@ -62,6 +65,8 @@ public class CadastroClienteView extends javax.swing.JFrame {
         LblNascimento = new javax.swing.JLabel();
         BtnSalvar = new javax.swing.JButton();
         TxtCadCliNascimento = new javax.swing.JFormattedTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TableCliente = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Clientes");
@@ -104,13 +109,27 @@ public class CadastroClienteView extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
+        TableCliente.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Id", "Nome", "Telefone"
+            }
+        ));
+        jScrollPane1.setViewportView(TableCliente);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnSalvar)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
@@ -137,9 +156,9 @@ public class CadastroClienteView extends javax.swing.JFrame {
                                     .addComponent(LblTelefone)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(TxtCadCliTelefone))
-                                .addComponent(TxtCadCliEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                                .addComponent(TxtCadCliEndereco)
                                 .addComponent(TxtCadCliNome)
-                                .addComponent(TxtCadCliEmail)))
+                                .addComponent(TxtCadCliEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(28, 28, 28)
                             .addComponent(LblSexo)
@@ -148,13 +167,13 @@ public class CadastroClienteView extends javax.swing.JFrame {
                             .addGap(51, 51, 51)
                             .addComponent(LblNascimento)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(TxtCadCliNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE))))
+                            .addComponent(TxtCadCliNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
+                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TxtCadCliId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LblId)
@@ -186,7 +205,9 @@ public class CadastroClienteView extends javax.swing.JFrame {
                     .addComponent(TxtCadCliNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BtnSalvar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -239,7 +260,11 @@ public class CadastroClienteView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroClienteView().setVisible(true);
+                try {
+                    new CadastroClienteView().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(CadastroClienteView.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -312,6 +337,14 @@ public class CadastroClienteView extends javax.swing.JFrame {
         this.TxtCadCliTelefone = TxtCadCliTelefone;
     }
 
+    public JTable getTableCliente() {
+        return TableCliente;
+    }
+
+    public void setTableCliente(JTable TableCliente) {
+        this.TableCliente = TableCliente;
+    }
+
   
     
 
@@ -323,6 +356,11 @@ public class CadastroClienteView extends javax.swing.JFrame {
         this.TxtCadcliSexo = TxtCadcliSexo;
     }
 
+      private void Iniciar() throws SQLException {
+        this.controller.atualizaTabela();
+       
+    }
+    
  
     
 
@@ -337,6 +375,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
     private javax.swing.JLabel LblRg;
     private javax.swing.JLabel LblSexo;
     private javax.swing.JLabel LblTelefone;
+    private javax.swing.JTable TableCliente;
     private javax.swing.JTextField TxtCadCliCep;
     private javax.swing.JTextField TxtCadCliEmail;
     private javax.swing.JTextField TxtCadCliEndereco;
@@ -346,5 +385,6 @@ public class CadastroClienteView extends javax.swing.JFrame {
     private javax.swing.JTextField TxtCadCliRg;
     private javax.swing.JFormattedTextField TxtCadCliTelefone;
     private javax.swing.JTextField TxtCadcliSexo;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

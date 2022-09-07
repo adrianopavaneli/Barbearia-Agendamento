@@ -41,6 +41,13 @@ public class Cliente {
         this.cep = cep;
     }
 
+    public Cliente(int id, String nome, String telefone) {
+        this.id = id;
+        this.nome = nome;
+        this.telefone = telefone;
+    }
+    
+
     public Cliente(String nome, String endereco, String cep, String telefone) {
         this.nome = nome;
         this.endereco = endereco;

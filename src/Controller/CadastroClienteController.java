@@ -4,6 +4,7 @@
  */
 package controller;
 
+import controller.Helper.ClienteHelper;
 import dao.ClienteDAO;
 import dao.Conexao;
 
@@ -11,6 +12,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,9 +28,22 @@ import view.CadastroClienteView;
  */
 public class CadastroClienteController {
     private CadastroClienteView view;
+    private final ClienteHelper helper;
 
     public CadastroClienteController(CadastroClienteView view) {
         this.view = view;
+        this.helper = new ClienteHelper(view);
+    }
+    public void atualizaTabela() throws SQLException{
+
+
+        //buscar lista com servicos
+        Connection conexao = new Conexao().getConnection();
+        ClienteDAO clienteDao = new ClienteDAO(conexao);
+        ArrayList<Cliente> clientes = clienteDao.selectAll();
+        //exibir lista na view
+        helper.preencherTabela(clientes);
+        
     }
     
     public void salvaCliente() throws ParseException{
@@ -41,6 +56,8 @@ public class CadastroClienteController {
             Connection conexao = new Conexao().getConnection();
             ClienteDAO clienteDao = new ClienteDAO(conexao);
             clienteDao.insert(cliente);
+            atualizaTabela();
+            helper.limpaTela();
             JOptionPane.showMessageDialog(null, "Cliente salvo com sucesso!");
             
         } catch (SQLException ex) {

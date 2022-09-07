@@ -5,6 +5,10 @@
 package view;
 
 import controller.CadastroUsuarioController;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTable;
 
 import javax.swing.JTextField;
 
@@ -21,11 +25,12 @@ public class CadastroUsuarioView extends javax.swing.JFrame {
     /**
      * Creates new form FormCadastroView
      */
-    public CadastroUsuarioView() {
+    public CadastroUsuarioView() throws SQLException {
         initComponents();
         controller = new CadastroUsuarioController(this);
         TxtCadId.setEnabled(false);
         TxtCadUsuario.setFocusable(true);
+        iniciar();
         
     }
 
@@ -45,6 +50,8 @@ public class CadastroUsuarioView extends javax.swing.JFrame {
         TxtCadUsuario = new javax.swing.JTextField();
         TxtCadSenha = new javax.swing.JTextField();
         BtnSalvar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TableUsuario = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Usuarios");
@@ -63,44 +70,64 @@ public class CadastroUsuarioView extends javax.swing.JFrame {
             }
         });
 
+        TableUsuario.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Id", "Usuário"
+            }
+        ));
+        jScrollPane1.setViewportView(TableUsuario);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(119, Short.MAX_VALUE)
-                .addComponent(BtnSalvar)
-                .addGap(101, 101, 101))
             .addGroup(layout.createSequentialGroup()
-                .addGap(95, 95, 95)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(LblId)
-                    .addComponent(LblUsuario)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(TxtCadSenha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-                        .addComponent(TxtCadUsuario, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addComponent(TxtCadId, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LblSenha))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(BtnSalvar)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(LblSenha)
+                        .addComponent(TxtCadSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(LblId)
+                            .addComponent(TxtCadId, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(LblUsuario)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(TxtCadUsuario))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(LblId)
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LblId)
+                    .addComponent(LblUsuario))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TxtCadId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LblUsuario)
-                .addGap(3, 3, 3)
-                .addComponent(TxtCadUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LblSenha)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TxtCadSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TxtCadId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtCadUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(LblSenha)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(TxtCadSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(BtnSalvar)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -146,7 +173,11 @@ public class CadastroUsuarioView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroUsuarioView().setVisible(true);
+                try {
+                    new CadastroUsuarioView().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(CadastroUsuarioView.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -174,7 +205,20 @@ public class CadastroUsuarioView extends javax.swing.JFrame {
     public void setTxtCadId(JTextField TxtCadId) {
         this.TxtCadId = TxtCadId;
     }
+
+    public JTable getTableUsuario() {
+        return TableUsuario;
+    }
+
+    public void setTableUsuario(JTable TableUsuario) {
+        this.TableUsuario = TableUsuario;
+    }
     
+    
+    private void iniciar() throws SQLException {
+        this.controller.atualizaTabela();
+       
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -182,8 +226,10 @@ public class CadastroUsuarioView extends javax.swing.JFrame {
     private javax.swing.JLabel LblId;
     private javax.swing.JLabel LblSenha;
     private javax.swing.JLabel LblUsuario;
+    private javax.swing.JTable TableUsuario;
     private javax.swing.JTextField TxtCadId;
     private javax.swing.JTextField TxtCadSenha;
     private javax.swing.JTextField TxtCadUsuario;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

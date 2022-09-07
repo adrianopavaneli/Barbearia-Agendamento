@@ -132,7 +132,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void MenuItemUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemUsuarioActionPerformed
-       CadastroUsuarioView telaDeCadastro = new CadastroUsuarioView();
+       CadastroUsuarioView telaDeCadastro = null;
+        try {
+            telaDeCadastro = new CadastroUsuarioView();
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
       telaDeCadastro.setVisible(true);
     }//GEN-LAST:event_MenuItemUsuarioActionPerformed
 
@@ -145,12 +150,22 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuItemAgendaActionPerformed
 
     private void MenuItemClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemClienteActionPerformed
-        CadastroClienteView telaDeCadastroCli = new CadastroClienteView();
+        CadastroClienteView telaDeCadastroCli = null;
+        try {
+            telaDeCadastroCli = new CadastroClienteView();
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         telaDeCadastroCli.setVisible(true);
     }//GEN-LAST:event_MenuItemClienteActionPerformed
 
     private void MenuItemServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemServicoActionPerformed
-        CadastroServicoView telaDeCadastroServico = new CadastroServicoView();
+        CadastroServicoView telaDeCadastroServico = null;
+        try {
+            telaDeCadastroServico = new CadastroServicoView();
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         telaDeCadastroServico.setVisible(true);
     }//GEN-LAST:event_MenuItemServicoActionPerformed
 
