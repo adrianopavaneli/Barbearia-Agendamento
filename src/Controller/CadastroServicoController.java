@@ -4,14 +4,19 @@
  */
 package controller;
 
+
+import controller.Helper.ServicoHelper;
+import dao.AgendamentoDAO;
 import dao.Conexao;
 import dao.ServicoDAO;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.Agendamento;
 import model.Servico;
 
 import view.CadastroServicoView;
@@ -23,9 +28,24 @@ import view.CadastroServicoView;
  */
 public class CadastroServicoController {
     private CadastroServicoView view;
+    private final ServicoHelper helper;
+    
 
     public CadastroServicoController(CadastroServicoView view) {
         this.view = view;
+        this.helper = new ServicoHelper(view);
+    }
+    
+     public void atualizaTabela() throws SQLException{
+
+
+        //buscar lista com servicos
+        Connection conexao = new Conexao().getConnection();
+        ServicoDAO servicoDao = new ServicoDAO(conexao);
+        ArrayList<Servico> servicos = servicoDao.selectAll();
+        //exibir lista na view
+        helper.preencherTabela(servicos);
+        
     }
     
     public void salvaServico(){
@@ -36,6 +56,8 @@ public class CadastroServicoController {
             Connection conexao = new Conexao().getConnection();
            ServicoDAO servicoDao = new ServicoDAO(conexao);
             servicoDao.insert(servico);
+            atualizaTabela();
+            helper.limpaTela();
             JOptionPane.showMessageDialog(null, "Servico salvo com sucesso!");
             
         } catch (SQLException ex) {

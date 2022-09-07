@@ -5,10 +5,13 @@
 package view;
 
 import controller.MenuPrincipalController;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
- * @author Didi
+ * @author Adriano Pavaneli
  */
 public class MenuPrincipal extends javax.swing.JFrame {
     
@@ -134,7 +137,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuItemUsuarioActionPerformed
 
     private void MenuItemAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemAgendaActionPerformed
-      this.controller.navegarParaAgenda();
+        try {
+            this.controller.navegarParaAgenda();
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_MenuItemAgendaActionPerformed
 
     private void MenuItemClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemClienteActionPerformed

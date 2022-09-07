@@ -54,6 +54,7 @@ public class Agendamento {
         this.observacao = observacao;
     }
 
+ 
    
     public int getId() {
         return id;
