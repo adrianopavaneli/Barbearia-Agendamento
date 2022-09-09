@@ -18,7 +18,7 @@ Busquei na internet a inspiração porem praticamente todo a aplicação foi des
 
 ## Apresentação
 
-Sistem conta com uma tela de login com cadastro de usuarios
+Sistema conta com uma tela de login com cadastro de usuarios
 <img src="https://github.com/adrianopavaneli/Barbearia-Agendamento/blob/main/src/view/imagens/telaloginprint.jpg" alt="drawing" width="700"/>
 
 Tela de menu principal onde tem os cadastros de usuarios, barbeiros, clientes e serviços. Tambem a operação de agendamento.
