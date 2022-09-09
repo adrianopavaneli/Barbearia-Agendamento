@@ -32,7 +32,7 @@ public class ClienteDAO {
      
 public void insert(Cliente cliente) throws SQLException, ParseException{
                    
-        String sql = "insert into cliente(nome,endereco,cep,telefone,email,rg,datanascimento,sexo) values(?,?,?,?,?,?,?,?)";
+        String sql = "insert into cliente(nome,endereco,cep,telefone,email,rg,datanascimento,sexo,cidade) values(?,?,?,?,?,?,?,?,?)";
         PreparedStatement statement = connection.prepareStatement(sql);
         
         statement.setString(1, cliente.getNome());
@@ -46,7 +46,8 @@ public void insert(Cliente cliente) throws SQLException, ParseException{
         java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime());
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");            
         statement.setDate(7, dataSql);
-        statement.setString(8, cliente.getSexo());        
+        statement.setString(8, cliente.getSexo()); 
+        statement.setString(9, cliente.getCidade());
         statement.execute();           
             
         
@@ -96,8 +97,14 @@ private ArrayList<Cliente> pesquisa(PreparedStatement statement) throws SQLExcep
             String nome = resultSet.getString("nome");
             String endereco = resultSet.getString("endereco");
             String cep = resultSet.getString("cep");
+            String cidade = resultSet.getString("cidade");
+            String telefone = resultSet.getString("telefone");
+            String email = resultSet.getString("email");
+            java.sql.Date datanascimento = resultSet.getDate("datanascimento");
+            String sexo = resultSet.getString("sexo");
+            String rg = resultSet.getString("rg");
             
-            Cliente clienteComDados = new Cliente(id, nome, endereco, cep);
+            Cliente clienteComDados = new Cliente(id, nome, sexo,datanascimento,telefone,email,rg,endereco, cep,cidade);
             clientes.add(clienteComDados);
         }
         return clientes;

@@ -6,7 +6,7 @@ package controller;
 
 
 import controller.Helper.ServicoHelper;
-import dao.AgendamentoDAO;
+
 import dao.Conexao;
 import dao.ServicoDAO;
 
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import model.Agendamento;
+
 import model.Servico;
 
 import view.CadastroServicoView;
@@ -49,13 +49,14 @@ public class CadastroServicoController {
     }
     
     public void salvaServico(){
+        int id = Integer.parseInt(view.getTxtCadId().getText());
         double valor = Double.parseDouble(view.getTxtCadValor().getText());
-        Servico servico = new Servico(view.getTxtCadDescricao().getText() , valor);
+        Servico servico = new Servico(id,view.getTxtCadDescricao().getText() , valor);
         
         try {
             Connection conexao = new Conexao().getConnection();
            ServicoDAO servicoDao = new ServicoDAO(conexao);
-            servicoDao.insert(servico);
+            servicoDao.insertOuUpdate(servico);
             atualizaTabela();
             helper.limpaTela();
             JOptionPane.showMessageDialog(null, "Servico salvo com sucesso!");
@@ -65,5 +66,16 @@ public class CadastroServicoController {
             
         }
     }
+    public void deletaServico() throws SQLException{
+          int id = Integer.parseInt(view.getTxtCadId().getText());
+          double valor = Double.parseDouble(view.getTxtCadValor().getText());
+        Servico servico = new Servico(id ,view.getTxtCadDescricao().getText(),valor);
+          
+           Connection conexao = new Conexao().getConnection();
+            ServicoDAO servicoDao = new ServicoDAO(conexao);
+            servicoDao.delete(servico);
+            atualizaTabela();
+            
+        }
     
 }

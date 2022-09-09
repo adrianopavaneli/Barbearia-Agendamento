@@ -55,7 +55,7 @@ public class CadastroClienteController {
         try {
             Connection conexao = new Conexao().getConnection();
             ClienteDAO clienteDao = new ClienteDAO(conexao);
-            clienteDao.insert(cliente);
+            clienteDao.insertOuUpdate(cliente);
             atualizaTabela();
             helper.limpaTela();
             JOptionPane.showMessageDialog(null, "Cliente salvo com sucesso!");
@@ -65,5 +65,15 @@ public class CadastroClienteController {
             
         }
     }
+     public void deletaCliente() throws SQLException{
+          int id = Integer.parseInt(view.getTxtCadCliId().getText());
+        Cliente cliente = new Cliente(id);
+          
+           Connection conexao = new Conexao().getConnection();
+            ClienteDAO clienteDao = new ClienteDAO(conexao);
+            clienteDao.delete(cliente);
+            atualizaTabela();
+            
+        } 
     
 }

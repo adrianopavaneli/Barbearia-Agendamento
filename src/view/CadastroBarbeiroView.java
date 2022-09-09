@@ -4,50 +4,41 @@
  */
 package view;
 
-import controller.CadastroUsuarioController;
-import controller.Helper.UsuarioHelper;
+import controller.CadastroBarbeiroController;
+import controller.Helper.BarbeiroHelper;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
 import javax.swing.JTable;
-
 import javax.swing.JTextField;
-
-
-
 
 /**
  *
  * @author Adriano Pavaneli
  */
-public class CadastroUsuarioView extends javax.swing.JFrame {
-
-    private final CadastroUsuarioController controller;
-    private final UsuarioHelper helper;
+public class CadastroBarbeiroView extends javax.swing.JFrame {
+    
+    private final CadastroBarbeiroController controller;
+    private final BarbeiroHelper helper;
 
     /**
-     * Creates new form FormCadastroView
+     * Creates new form CadastroBarbeiroView
      */
-    public CadastroUsuarioView() throws SQLException, ParseException {
+    public CadastroBarbeiroView() throws SQLException, ParseException {
         initComponents();
-        controller = new CadastroUsuarioController(this);
-        helper = new UsuarioHelper(this);
+        controller = new CadastroBarbeiroController(this);
+        helper = new BarbeiroHelper(this);
         TxtCadId.setEnabled(false);
-        TxtCadUsuario.setEnabled(false);
-        TxtCadSenha.setEnabled(false);        
+        TxtCadNome.setEnabled(false);               
         BtnInserir.setEnabled(true);
         BtnAlterar.setEnabled(true);
         BtnExcluir.setEnabled(true);
         BtnSalvar.setEnabled(false);
         BtnCancelar.setEnabled(false);
         BtnFechar.setEnabled(true);
-        
         iniciar();
-        
     }
 
     /**
@@ -59,30 +50,22 @@ public class CadastroUsuarioView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        LblId = new javax.swing.JLabel();
-        LblUsuario = new javax.swing.JLabel();
-        LblSenha = new javax.swing.JLabel();
-        TxtCadId = new javax.swing.JTextField();
-        TxtCadUsuario = new javax.swing.JTextField();
-        TxtCadSenha = new javax.swing.JPasswordField();
         BtnSalvar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TableUsuario = new javax.swing.JTable();
+        TableBarbeiro = new javax.swing.JTable();
         BtnInserir = new javax.swing.JButton();
         BtnAlterar = new javax.swing.JButton();
+        LblId = new javax.swing.JLabel();
         BtnExcluir = new javax.swing.JButton();
+        LblNome = new javax.swing.JLabel();
         BtnFechar = new javax.swing.JButton();
         BtnCancelar = new javax.swing.JButton();
+        TxtCadId = new javax.swing.JTextField();
+        TxtCadNome = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro de Usuarios");
+        setTitle("Cadastro de Barbeiros");
         setLocation(new java.awt.Point(550, 250));
-
-        LblId.setText("Id");
-
-        LblUsuario.setText("Usuário:");
-
-        LblSenha.setText("Senha:");
 
         BtnSalvar.setText("Salvar");
         BtnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -91,7 +74,7 @@ public class CadastroUsuarioView extends javax.swing.JFrame {
             }
         });
 
-        TableUsuario.setModel(new javax.swing.table.DefaultTableModel(
+        TableBarbeiro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -99,7 +82,7 @@ public class CadastroUsuarioView extends javax.swing.JFrame {
                 {null, null}
             },
             new String [] {
-                "Id", "Usuário"
+                "Id", "Nome"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -110,20 +93,20 @@ public class CadastroUsuarioView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        TableUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+        TableBarbeiro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TableUsuarioMouseClicked(evt);
+                TableBarbeiroMouseClicked(evt);
             }
         });
-        TableUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+        TableBarbeiro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                TableUsuarioKeyPressed(evt);
+                TableBarbeiroKeyPressed(evt);
             }
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                TableUsuarioKeyReleased(evt);
+                TableBarbeiroKeyReleased(evt);
             }
         });
-        jScrollPane1.setViewportView(TableUsuario);
+        jScrollPane1.setViewportView(TableBarbeiro);
 
         BtnInserir.setText("Inserir");
         BtnInserir.addActionListener(new java.awt.event.ActionListener() {
@@ -139,12 +122,16 @@ public class CadastroUsuarioView extends javax.swing.JFrame {
             }
         });
 
+        LblId.setText("Id");
+
         BtnExcluir.setText("Excluir");
         BtnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnExcluirActionPerformed(evt);
             }
         });
+
+        LblNome.setText("Nome:");
 
         BtnFechar.setText("Fechar");
         BtnFechar.addActionListener(new java.awt.event.ActionListener() {
@@ -167,13 +154,6 @@ public class CadastroUsuarioView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(LblSenha)
-                                .addGap(74, 74, 74))
-                            .addComponent(TxtCadSenha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(TxtCadId, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -181,10 +161,10 @@ public class CadastroUsuarioView extends javax.swing.JFrame {
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(LblUsuario)
+                                .addComponent(LblNome)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(TxtCadUsuario)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(TxtCadNome)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(BtnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -205,15 +185,11 @@ public class CadastroUsuarioView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LblId)
-                    .addComponent(LblUsuario))
+                    .addComponent(LblNome))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TxtCadId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TxtCadUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LblSenha)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(TxtCadSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtCadNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnSalvar)
@@ -224,73 +200,62 @@ public class CadastroUsuarioView extends javax.swing.JFrame {
                     .addComponent(BtnCancelar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void atualizaJTable(){
-        int indicelinha = TableUsuario.getSelectedRow();
-        TxtCadId.setText(TableUsuario.getValueAt(indicelinha, 0).toString());
-        TxtCadUsuario.setText(TableUsuario.getValueAt(indicelinha, 1).toString());
-        
-        
-    }    
     private void BtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalvarActionPerformed
-        if(TxtCadUsuario.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Usuário não pode ficar em branco!");
-            TxtCadUsuario.grabFocus();
-        }else if (TxtCadSenha.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Senha não pode ficar em branco!");
-            TxtCadSenha.grabFocus();
+        if(TxtCadNome.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Barbeiro não pode ficar em branco!");
+            TxtCadNome.grabFocus();
+        
         }else{
-            controller.salvaUsuario();
+            controller.salvaBarbeiro();
             TxtCadId.setEnabled(false);
-            TxtCadUsuario.setEnabled(false);
-            TxtCadSenha.setEnabled(false);        
+            TxtCadNome.setEnabled(false);            
             BtnInserir.setEnabled(true);
             BtnAlterar.setEnabled(true);
             BtnExcluir.setEnabled(true);
             BtnSalvar.setEnabled(false);
             BtnCancelar.setEnabled(false);
             BtnFechar.setEnabled(true);
-            TxtCadUsuario.grabFocus();
-           
+            TxtCadNome.grabFocus();
+
         }
-        
-          
-        
-      
-      
-        
-        
-        
+
     }//GEN-LAST:event_BtnSalvarActionPerformed
 
-    private void TableUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableUsuarioMouseClicked
+    private void TableBarbeiroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableBarbeiroMouseClicked
         atualizaJTable();
-    }//GEN-LAST:event_TableUsuarioMouseClicked
+    }//GEN-LAST:event_TableBarbeiroMouseClicked
 
-    private void TableUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TableUsuarioKeyPressed
+    private void TableBarbeiroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TableBarbeiroKeyPressed
         atualizaJTable();
-    }//GEN-LAST:event_TableUsuarioKeyPressed
+    }//GEN-LAST:event_TableBarbeiroKeyPressed
 
-    private void TableUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TableUsuarioKeyReleased
+    private void TableBarbeiroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TableBarbeiroKeyReleased
         atualizaJTable();
-    }//GEN-LAST:event_TableUsuarioKeyReleased
+    }//GEN-LAST:event_TableBarbeiroKeyReleased
 
+    public void atualizaJTable(){
+        int indicelinha = TableBarbeiro.getSelectedRow();
+        TxtCadId.setText(TableBarbeiro.getValueAt(indicelinha, 0).toString());
+        TxtCadNome.setText(TableBarbeiro.getValueAt(indicelinha, 1).toString());
+        
+        
+    }    
     private void BtnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInserirActionPerformed
         TxtCadId.setEnabled(false);
-        TxtCadUsuario.setEnabled(true);
-        TxtCadSenha.setEnabled(true);        
+        TxtCadNome.setEnabled(true);       
         BtnInserir.setEnabled(false);
         BtnAlterar.setEnabled(false);
         BtnExcluir.setEnabled(false);
         BtnSalvar.setEnabled(true);
         BtnCancelar.setEnabled(true);
         BtnFechar.setEnabled(false);
-        TxtCadUsuario.grabFocus();
+        TxtCadNome.grabFocus();
         helper.limpaTela();
     }//GEN-LAST:event_BtnInserirActionPerformed
 
@@ -298,59 +263,89 @@ public class CadastroUsuarioView extends javax.swing.JFrame {
         if(TxtCadId.getText().isEmpty()){
             JOptionPane.showMessageDialog(null,"Você precisar selecionar um usuario para alterar!");
         }else{
-        TxtCadId.setEnabled(false);
-        TxtCadUsuario.setEnabled(true);
-        TxtCadSenha.setEnabled(true);        
-        BtnInserir.setEnabled(false);
-        BtnAlterar.setEnabled(false);
-        BtnExcluir.setEnabled(false);
-        BtnSalvar.setEnabled(true);
-        BtnCancelar.setEnabled(true);
-        BtnFechar.setEnabled(false);
-        TxtCadUsuario.grabFocus();
+            TxtCadId.setEnabled(false);
+            TxtCadNome.setEnabled(true);            
+            BtnInserir.setEnabled(false);
+            BtnAlterar.setEnabled(false);
+            BtnExcluir.setEnabled(false);
+            BtnSalvar.setEnabled(true);
+            BtnCancelar.setEnabled(true);
+            BtnFechar.setEnabled(false);
+            TxtCadNome.grabFocus();
         }
     }//GEN-LAST:event_BtnAlterarActionPerformed
 
     private void BtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnExcluirActionPerformed
-       if(TxtCadId.getText().isEmpty()){
-           JOptionPane.showMessageDialog(null,"Você precisar selecionar um usuario para excluir!");
-       }else{
-        int i = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o Usuario " + TxtCadUsuario.getText() + "?","Exclusão", JOptionPane.YES_NO_OPTION);
-           if(i == JOptionPane.YES_OPTION){
-            try {
-                controller.deletaUsuario();
-            } catch (SQLException ex) {
-                Logger.getLogger(CadastroUsuarioView.class.getName()).log(Level.SEVERE, null, ex);
+        if(TxtCadId.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Você precisar selecionar um barbeiro para excluir!");
+        }else{
+            int i = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o Barbeiro " + TxtCadNome.getText() + "?","Exclusão", JOptionPane.YES_NO_OPTION);
+            if(i == JOptionPane.YES_OPTION){
+                
+                try {
+                    controller.deletaBarbeiro();
+                } catch (SQLException ex) {
+                    java.util.logging.Logger.getLogger(CadastroBarbeiroView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                }
+                
+                JOptionPane.showMessageDialog(null,"Barbeiro excluido com sucesso");
             }
-               JOptionPane.showMessageDialog(null,"Usuário excluido com sucesso");
-           }
-               
-          
-       }
+
+        }
     }//GEN-LAST:event_BtnExcluirActionPerformed
 
     private void BtnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnFecharActionPerformed
-        
-        CadastroUsuarioView.this.dispose();
+
+        CadastroBarbeiroView.this.dispose();
     }//GEN-LAST:event_BtnFecharActionPerformed
 
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
-       
-            TxtCadId.setEnabled(false);
-            TxtCadUsuario.setEnabled(false);
-            TxtCadSenha.setEnabled(false);        
-            BtnInserir.setEnabled(true);
-            BtnAlterar.setEnabled(true);
-            BtnExcluir.setEnabled(true);
-            BtnSalvar.setEnabled(false);
-            BtnFechar.setEnabled(true);
-            BtnCancelar.setEnabled(false);
-            TxtCadUsuario.grabFocus();
+
+        TxtCadId.setEnabled(false);
+        TxtCadNome.setEnabled(false);
+        
+        BtnInserir.setEnabled(true);
+        BtnAlterar.setEnabled(true);
+        BtnExcluir.setEnabled(true);
+        BtnSalvar.setEnabled(false);
+        BtnFechar.setEnabled(true);
+        BtnCancelar.setEnabled(false);
+        TxtCadNome.grabFocus();
     }//GEN-LAST:event_BtnCancelarActionPerformed
 
+     private void iniciar() throws SQLException, ParseException {
+        this.controller.atualizaTabela();
+        
+       
+    }
+    public JTable getTableBarbeiro() {
+        return TableBarbeiro;
+    }
+
+    public void setTableBarbeiro(JTable TableBarbeiro) {
+        this.TableBarbeiro = TableBarbeiro;
+    }
+
+  
+
+    public JTextField getTxtCadId() {
+        return TxtCadId;
+    }
+
+    public void setTxtCadId(JTextField TxtCadId) {
+        this.TxtCadId = TxtCadId;
+    }
+
+    public JTextField getTxtCadNome() {
+        return TxtCadNome;
+    }
+
+    public void setTxtCadNome(JTextField TxtCadNome) {
+        this.TxtCadNome = TxtCadNome;
+    }
+
+    
     /**
-     * 
-     * 
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -367,70 +362,29 @@ public class CadastroUsuarioView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroUsuarioView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroBarbeiroView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroUsuarioView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroBarbeiroView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroUsuarioView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroBarbeiroView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroUsuarioView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroBarbeiroView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new CadastroUsuarioView().setVisible(true);
+                    new CadastroBarbeiroView().setVisible(true);
                 } catch (SQLException ex) {
-                    Logger.getLogger(CadastroUsuarioView.class.getName()).log(Level.SEVERE, null, ex);
+                    java.util.logging.Logger.getLogger(CadastroBarbeiroView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
                 } catch (ParseException ex) {
-                    Logger.getLogger(CadastroUsuarioView.class.getName()).log(Level.SEVERE, null, ex);
+                    java.util.logging.Logger.getLogger(CadastroBarbeiroView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
                 }
             }
         });
     }
-
-    public JTextField getTxtCadSenha() {
-        return TxtCadSenha;
-    }
-
-    public void setTxtCadSenha(JPasswordField TxtCadSenha) {
-        this.TxtCadSenha = TxtCadSenha;
-    }
-
-    public JTextField getTxtCadUsuario() {
-        return TxtCadUsuario;
-    }
-
-    public void setTxtCadUsuario(JTextField TxtCadUsuario) {
-        this.TxtCadUsuario = TxtCadUsuario;
-    }
-
-    public JTextField getTxtCadId() {
-        return TxtCadId;
-    }
-
-    public void setTxtCadId(JTextField TxtCadId) {
-        this.TxtCadId = TxtCadId;
-    }
-
-    public JTable getTableUsuario() {
-        return TableUsuario;
-    }
-
-    public void setTableUsuario(JTable TableUsuario) {
-        this.TableUsuario = TableUsuario;
-    }
-    
-    
-    private void iniciar() throws SQLException, ParseException {
-        this.controller.atualizaTabela();
-        
-       
-    }
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAlterar;
@@ -440,12 +394,12 @@ public class CadastroUsuarioView extends javax.swing.JFrame {
     private javax.swing.JButton BtnInserir;
     private javax.swing.JButton BtnSalvar;
     private javax.swing.JLabel LblId;
-    private javax.swing.JLabel LblSenha;
-    private javax.swing.JLabel LblUsuario;
-    private javax.swing.JTable TableUsuario;
+    private javax.swing.JLabel LblNome;
+    private javax.swing.JTable TableBarbeiro;
     private javax.swing.JTextField TxtCadId;
-    private javax.swing.JPasswordField TxtCadSenha;
-    private javax.swing.JTextField TxtCadUsuario;
+    private javax.swing.JTextField TxtCadNome;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
+
+

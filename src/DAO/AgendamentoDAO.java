@@ -5,12 +5,17 @@
  */
 package dao;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+
 import model.Agendamento;
 import java.util.ArrayList;
+import java.util.Date;
+import model.Barbeiro;
 import model.Cliente;
 import model.Servico;
 
@@ -30,19 +35,22 @@ public class AgendamentoDAO {
     }
      
      public void atualizaDataAgendamento() throws SQLException{
-        String sql = "UPDATE  agendamento SET ativo = true WHERE dataagenda > '2022-09-07 08:00:00'";
+        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String timeStamp = date.format(new Date());        
+        String sql = "UPDATE  agendamento SET ativo = false WHERE dataagenda < " + "'" + timeStamp + "'";        
         PreparedStatement statement = connection.prepareStatement(sql);
-//        statement.setString(1, cliente.getNome());
-//        statement.setString(2, cliente.getEndereco());
-//        statement.setString(3, cliente.getCep());
-//        
-//        statement.setInt(4, cliente.getId());
+        
+
         statement.execute();
     }
     
      
      public ArrayList<Agendamento> selectAll() throws SQLException{
-        String sql = "select p.id as pid, p.valor as pvalor, dataagenda, observacao, id_cliente, id_servico,ativo, c.id as cid, nome, sexo, datanascimento, telefone, email, rg, endereco, cep, s.id as sid, descricao, s.valor as svalor from agendamento p inner join cliente c ON c.id = p.id_cliente inner join servico s on s.id = p.id_servico where ativo = true order by dataagenda";
+        String sql = "select p.id as pid, p.valor as pvalor, dataagenda, observacao, \n" +
+"id_cliente, id_servico,ativo, id_barbeiro, c.id as cid, c.nome as cnome, sexo, \n" +
+"datanascimento, telefone, email, rg, endereco, cep, s.id as sid, descricao,\n" +
+"s.valor as svalor, b.id as bid, b.nome as bnome from agendamento p inner join cliente c ON c.id = \n" +
+"p.id_cliente inner join servico s on s.id = p.id_servico inner join barbeiro b ON b.id = p.id_barbeiro where ativo = true order by dataagenda";
         PreparedStatement statement = connection.prepareStatement(sql);
         return pesquisa(statement);        
         
@@ -57,14 +65,17 @@ public class AgendamentoDAO {
             double valor = resultSet.getDouble("pvalor");
             Cliente cliente = new Cliente();
             cliente.setId(resultSet.getInt("cid"));
-            cliente.setNome(resultSet.getString("nome"));            
+            cliente.setNome(resultSet.getString("cnome"));            
             Servico servico = new Servico();
             servico.setId(resultSet.getInt("sid"));
             servico.setDescricao(resultSet.getString("descricao"));
+            Barbeiro barbeiro = new Barbeiro();
+            barbeiro.setId(resultSet.getInt("bid"));
+            barbeiro.setNome(resultSet.getString("bnome"));            
             java.sql.Timestamp dataagenda = resultSet.getTimestamp("dataagenda");            
             String observacao = resultSet.getString("observacao");
             
-            Agendamento agendamentoComDados = new Agendamento(id, cliente, servico,valor,dataagenda, observacao);
+            Agendamento agendamentoComDados = new Agendamento(id, cliente, servico,barbeiro,valor,dataagenda, observacao);
             agendamentos.add(agendamentoComDados);
         }
         return agendamentos;
@@ -77,7 +88,7 @@ public class AgendamentoDAO {
      
      public void insert(Agendamento agendamento) throws SQLException{
                    
-        String sql = "insert into agendamento(valor,dataagenda,observacao,id_cliente,id_servico,ativo) values(?,?,?,?,?,true)";
+        String sql = "insert into agendamento(valor,dataagenda,observacao,id_cliente,id_servico,id_barbeiro,ativo) values(?,?,?,?,?,?,true)";
         PreparedStatement statement = connection.prepareStatement(sql);        
         statement.setDouble(1, agendamento.getValor());         
         java.util.Date dataUtil = new java.util.Date();
@@ -87,63 +98,16 @@ public class AgendamentoDAO {
         statement.setString(3, agendamento.getObservacao());
         statement.setInt(4, agendamento.getCliente().getId());
         statement.setInt(5, agendamento.getServico().getId());
+        statement.setInt(6, agendamento.getBarbeiro().getId());
         
         statement.execute();           
              
-    }
-     
+    }     
         
-    }
+    
+  
     
    
+    }
     
-    /**
-     * Deleta um objeto do banco de dados pelo id do agendamento passado
-     * @param agendamento
-     * @return 
-     */
-//    public boolean delete(Agendamento agendamento){
-//        for (Agendamento agendamentoLista : Banco.agendamento) {
-//            if(idSaoIguais(agendamentoLista,agendamento)){
-//                Banco.agendamento.remove(agendamentoLista);
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-    
-    /**
-     * Retorna um arraylist com todos os agendamentos do banco de dados
-     * @return uma lista com todos os registros do banco
-     */
-//    public ArrayList<Agendamento> selectAll(){
-//        return Banco.agendamento;
-//    }
-//    
-//    /**
-//     * Compara se dois objetos tem a propriedade id igual
-//     * @param agendamento
-//     * @param agendamentoAComparar
-//     * @return verdadeiro caso os id forem iguais e falso se nao forem
-//     */
-//    private boolean idSaoIguais(Agendamento agendamento, Agendamento agendamentoAComparar) {
-//        return agendamento.getId() ==  agendamentoAComparar.getId();
-//    }
-//    
-//    private int proximoId(){
-//        
-//        int maiorId = 0;
-//        
-//        for (Agendamento agendamento : Banco.agendamento) {           
-//           int id = agendamento.getId();
-//            
-//            if(maiorId < id){
-//                maiorId = id;
-//            }
-//            
-//        }
-//        
-//        return maiorId + 1;
-//    }
-    
-//}
+

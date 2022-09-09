@@ -6,6 +6,7 @@ package view;
 
 import controller.MenuPrincipalController;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,14 +42,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
         MenuItemCliente = new javax.swing.JMenuItem();
         MenuItemServico = new javax.swing.JMenuItem();
         MenuItemUsuario = new javax.swing.JMenuItem();
+        jMenuItemBarbeiro = new javax.swing.JMenuItem();
         MenuOperacao = new javax.swing.JMenu();
         MenuItemAgenda = new javax.swing.JMenuItem();
         MenuRelatorio = new javax.swing.JMenu();
-        MenuItemTrabalho = new javax.swing.JMenuItem();
+        MenuItemSair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setExtendedState(6);
 
         LblFundoMenuPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/menuprincipal.jpg"))); // NOI18N
+        LblFundoMenuPrincipal.setMaximumSize(new java.awt.Dimension(1200, 800));
+        LblFundoMenuPrincipal.setMinimumSize(new java.awt.Dimension(1200, 800));
 
         jMenuBar1.setToolTipText("");
         jMenuBar1.setName(""); // NOI18N
@@ -86,6 +91,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         MenuCadastro.add(MenuItemUsuario);
 
+        jMenuItemBarbeiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/icons/cliente32-icon.png"))); // NOI18N
+        jMenuItemBarbeiro.setText("Barbeiro");
+        jMenuItemBarbeiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemBarbeiroActionPerformed(evt);
+            }
+        });
+        MenuCadastro.add(jMenuItemBarbeiro);
+
         jMenuBar1.add(MenuCadastro);
 
         MenuOperacao.setText("Operação");
@@ -103,13 +117,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(MenuOperacao);
 
-        MenuRelatorio.setText("Relatório");
+        MenuRelatorio.setText("Sair");
         MenuRelatorio.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
-        MenuItemTrabalho.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        MenuItemTrabalho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/icons/relatorioTrabalho32-icon.png"))); // NOI18N
-        MenuItemTrabalho.setText("Trabalho");
-        MenuRelatorio.add(MenuItemTrabalho);
+        MenuItemSair.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        MenuItemSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/icons/relatorioTrabalho32-icon.png"))); // NOI18N
+        MenuItemSair.setText("Sair");
+        MenuItemSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemSairActionPerformed(evt);
+            }
+        });
+        MenuRelatorio.add(MenuItemSair);
 
         jMenuBar1.add(MenuRelatorio);
 
@@ -119,16 +138,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(LblFundoMenuPrincipal)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(LblFundoMenuPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 1200, Short.MAX_VALUE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(LblFundoMenuPrincipal)
+            .addComponent(LblFundoMenuPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
         );
 
-        pack();
+        setSize(new java.awt.Dimension(916, 837));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void MenuItemUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemUsuarioActionPerformed
@@ -136,6 +156,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         try {
             telaDeCadastro = new CadastroUsuarioView();
         } catch (SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
             Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
       telaDeCadastro.setVisible(true);
@@ -168,6 +190,22 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
         telaDeCadastroServico.setVisible(true);
     }//GEN-LAST:event_MenuItemServicoActionPerformed
+
+    private void jMenuItemBarbeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBarbeiroActionPerformed
+     CadastroBarbeiroView telaDeCadastroBarbeiro = null;
+        try {
+            telaDeCadastroBarbeiro = new CadastroBarbeiroView();
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        telaDeCadastroBarbeiro.setVisible(true);
+    }//GEN-LAST:event_jMenuItemBarbeiroActionPerformed
+
+    private void MenuItemSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemSairActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_MenuItemSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -210,11 +248,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu MenuCadastro;
     private javax.swing.JMenuItem MenuItemAgenda;
     private javax.swing.JMenuItem MenuItemCliente;
+    private javax.swing.JMenuItem MenuItemSair;
     private javax.swing.JMenuItem MenuItemServico;
-    private javax.swing.JMenuItem MenuItemTrabalho;
     private javax.swing.JMenuItem MenuItemUsuario;
     private javax.swing.JMenu MenuOperacao;
     private javax.swing.JMenu MenuRelatorio;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItemBarbeiro;
     // End of variables declaration//GEN-END:variables
 }

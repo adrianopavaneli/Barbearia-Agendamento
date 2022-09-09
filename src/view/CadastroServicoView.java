@@ -5,10 +5,12 @@
 package view;
 
 import controller.CadastroServicoController;
-import controller.CadastroUsuarioController;
+
+import controller.Helper.ServicoHelper;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 import javax.swing.JTextField;
@@ -22,6 +24,7 @@ import javax.swing.JTextField;
 public class CadastroServicoView extends javax.swing.JFrame {
 
     private final CadastroServicoController controller;
+    private final ServicoHelper helper;
 
     /**
      * Creates new form FormCadastroView
@@ -29,8 +32,16 @@ public class CadastroServicoView extends javax.swing.JFrame {
     public CadastroServicoView() throws SQLException {
         initComponents();
         controller = new CadastroServicoController(this);
+        helper = new ServicoHelper(this);
         TxtCadId.setEnabled(false);
-        TxtCadDescricao.setFocusable(true);
+        TxtCadDescricao.setEnabled(false);
+        TxtCadValor.setEnabled(false);        
+        BtnInserir.setEnabled(true);
+        BtnAlterar.setEnabled(true);
+        BtnExcluir.setEnabled(true);
+        BtnSalvar.setEnabled(false);
+        BtnCancelar.setEnabled(false);
+        BtnFechar.setEnabled(true);
         iniciar();
         
     }
@@ -55,6 +66,11 @@ public class CadastroServicoView extends javax.swing.JFrame {
         BtnSalvar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         TableServicos = new javax.swing.JTable();
+        BtnCancelar = new javax.swing.JButton();
+        BtnInserir = new javax.swing.JButton();
+        BtnAlterar = new javax.swing.JButton();
+        BtnExcluir = new javax.swing.JButton();
+        BtnFechar = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -96,43 +112,114 @@ public class CadastroServicoView extends javax.swing.JFrame {
             new String [] {
                 "Id", "Descrição", "Valor"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TableServicos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TableServicosMouseClicked(evt);
+            }
+        });
+        TableServicos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TableServicosKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TableServicosKeyReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(TableServicos);
+
+        BtnCancelar.setText("Cancelar");
+        BtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCancelarActionPerformed(evt);
+            }
+        });
+
+        BtnInserir.setText("Inserir");
+        BtnInserir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnInserirActionPerformed(evt);
+            }
+        });
+
+        BtnAlterar.setText("Alterar");
+        BtnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAlterarActionPerformed(evt);
+            }
+        });
+
+        BtnExcluir.setText("Excluir");
+        BtnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnExcluirActionPerformed(evt);
+            }
+        });
+
+        BtnFechar.setText("Fechar");
+        BtnFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnFecharActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TxtCadId, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LblId))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(LblSenha)
+                                .addGap(167, 167, 167))
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(LblId)
-                                    .addComponent(TxtCadId, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TxtCadDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(LblUsuario))))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(LblUsuario)
+                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(TxtCadDescricao)
+                                        .addContainerGap())))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BtnSalvar, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(LblSenha)
-                                .addComponent(TxtCadValor, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(BtnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BtnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BtnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(BtnCancelar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BtnSalvar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BtnFechar))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(TxtCadValor, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -141,29 +228,136 @@ public class CadastroServicoView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TxtCadId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(TxtCadDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(3, 3, 3)
                 .addComponent(LblSenha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TxtCadValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnSalvar)
+                    .addComponent(BtnInserir)
+                    .addComponent(BtnAlterar)
+                    .addComponent(BtnExcluir)
+                    .addComponent(BtnCancelar)
+                    .addComponent(BtnFechar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BtnSalvar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+     public void atualizaJTable(){
+        int indicelinha = TableServicos.getSelectedRow();
+        TxtCadId.setText(TableServicos.getValueAt(indicelinha, 0).toString());
+        TxtCadDescricao.setText(TableServicos.getValueAt(indicelinha, 1).toString());
+        TxtCadValor.setText(TableServicos.getValueAt(indicelinha, 2).toString());
+     }  
+        
+        
     private void BtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalvarActionPerformed
-      controller.salvaServico();
-      
-      
-      
+        if(TxtCadDescricao.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Descrição não pode ficar em branco!");
+            TxtCadDescricao.grabFocus();
+        }else if (TxtCadValor.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Valor não pode ficar em branco!");
+            TxtCadValor.grabFocus();
+        }else{
+            controller.salvaServico();
+            TxtCadId.setEnabled(false);
+            TxtCadDescricao.setEnabled(false);
+            TxtCadValor.setEnabled(false);        
+            BtnInserir.setEnabled(true);
+            BtnAlterar.setEnabled(true);
+            BtnExcluir.setEnabled(true);
+            BtnSalvar.setEnabled(false);
+            BtnCancelar.setEnabled(false);
+            BtnFechar.setEnabled(true);
+            TxtCadDescricao.grabFocus();
         
-        
+        }        
         
     }//GEN-LAST:event_BtnSalvarActionPerformed
+
+    private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
+
+        TxtCadId.setEnabled(false);
+        TxtCadDescricao.setEnabled(false);
+        TxtCadValor.setEnabled(false);
+        BtnInserir.setEnabled(true);
+        BtnAlterar.setEnabled(true);
+        BtnExcluir.setEnabled(true);
+        BtnSalvar.setEnabled(false);
+        BtnFechar.setEnabled(true);
+        BtnCancelar.setEnabled(false);
+        TxtCadDescricao.grabFocus();
+    }//GEN-LAST:event_BtnCancelarActionPerformed
+
+    private void BtnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInserirActionPerformed
+        TxtCadId.setEnabled(false);
+        TxtCadDescricao.setEnabled(true);
+        TxtCadValor.setEnabled(true);
+        BtnInserir.setEnabled(false);
+        BtnAlterar.setEnabled(false);
+        BtnExcluir.setEnabled(false);
+        BtnSalvar.setEnabled(true);
+        BtnCancelar.setEnabled(true);
+        BtnFechar.setEnabled(false);
+        TxtCadDescricao.grabFocus();
+        helper.limpaTela();
+    }//GEN-LAST:event_BtnInserirActionPerformed
+
+    private void BtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAlterarActionPerformed
+         if(TxtCadId.getText().isEmpty()){
+             JOptionPane.showMessageDialog(null,"Você precisar selecionar um serviço para alterar!");
+         }else{
+             TxtCadId.setEnabled(false);
+             TxtCadDescricao.setEnabled(true);
+             TxtCadValor.setEnabled(true);
+             BtnInserir.setEnabled(false);
+             BtnAlterar.setEnabled(false);
+             BtnExcluir.setEnabled(false);
+             BtnSalvar.setEnabled(true);
+             BtnCancelar.setEnabled(true);
+             BtnFechar.setEnabled(false);
+             TxtCadDescricao.grabFocus();
+         }
+    }//GEN-LAST:event_BtnAlterarActionPerformed
+
+    private void BtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnExcluirActionPerformed
+        if(TxtCadId.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Você precisar selecionar um serviço para excluir!");
+        }else{
+            int i = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o serviço " + TxtCadDescricao.getText() + "?","Exclusão", JOptionPane.YES_NO_OPTION);
+            if(i == JOptionPane.YES_OPTION){
+                try {
+                    controller.deletaServico();
+                } catch (SQLException ex) {
+                    Logger.getLogger(CadastroServicoView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                JOptionPane.showMessageDialog(null,"Usuário excluido com sucesso");
+            }
+
+        }
+    }//GEN-LAST:event_BtnExcluirActionPerformed
+
+    private void BtnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnFecharActionPerformed
+
+        CadastroServicoView.this.dispose();
+    }//GEN-LAST:event_BtnFecharActionPerformed
+
+    private void TableServicosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableServicosMouseClicked
+        atualizaJTable();
+    }//GEN-LAST:event_TableServicosMouseClicked
+
+    private void TableServicosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TableServicosKeyPressed
+       atualizaJTable();
+    }//GEN-LAST:event_TableServicosKeyPressed
+
+    private void TableServicosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TableServicosKeyReleased
+        atualizaJTable();
+    }//GEN-LAST:event_TableServicosKeyReleased
 
     /**
      * @param args the command line arguments
@@ -248,6 +442,11 @@ public class CadastroServicoView extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnAlterar;
+    private javax.swing.JButton BtnCancelar;
+    private javax.swing.JButton BtnExcluir;
+    private javax.swing.JButton BtnFechar;
+    private javax.swing.JButton BtnInserir;
     private javax.swing.JButton BtnSalvar;
     private javax.swing.JLabel LblId;
     private javax.swing.JLabel LblSenha;

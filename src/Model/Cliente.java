@@ -24,6 +24,26 @@ public class Cliente {
     private String rg;
     private String endereco;
     private String cep;
+    private String cidade;
+
+    public Cliente(int id, String nome, String sexo, Date dataNascimento, String telefone, String email, String rg, String endereco, String cep, String cidade) {
+        this.id = id;
+        this.nome = nome;
+        this.sexo = sexo;
+        this.dataNascimento = dataNascimento;
+        this.telefone = telefone;
+        this.email = email;
+        this.rg = rg;
+        this.endereco = endereco;
+        this.cep = cep;
+        this.cidade = cidade;
+    }
+
+    public Cliente(int id) {
+        this.id = id;
+    }
+    
+    
 
     public Cliente(int id, String nome, String sexo,String dataNascimento, String telefone, String email, String rg, String endereco, String cep) {
         this.id = id;
@@ -85,6 +105,15 @@ public class Cliente {
         return id;
     }
 
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    
     public void setId(int id) {
         this.id = id;
     }

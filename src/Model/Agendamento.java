@@ -19,6 +19,7 @@ public class Agendamento {
     private int id;
     private Cliente cliente;
     private Servico servico;
+    private Barbeiro barbeiro;
     private double valor;
     private Date data;
     private boolean ativo;
@@ -37,10 +38,11 @@ public class Agendamento {
         }
     }
 
-    public Agendamento(int id, Cliente cliente, Servico servico, double valor, Date data, String observacao) {
+    public Agendamento(int id, Cliente cliente, Servico servico, Barbeiro barbeiro,double valor, Date data, String observacao) {
         this.id = id;
         this.cliente = cliente;
         this.servico = servico;
+        this.barbeiro = barbeiro;
         this.valor = valor;
         this.data = data;
         this.observacao = observacao;
@@ -54,6 +56,14 @@ public class Agendamento {
         this.valor = valor;
         this.data = data;
         this.observacao = observacao;
+    }
+
+    public Barbeiro getBarbeiro() {
+        return barbeiro;
+    }
+
+    public void setBarbeiro(Barbeiro barbeiro) {
+        this.barbeiro = barbeiro;
     }
 
  

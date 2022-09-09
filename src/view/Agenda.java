@@ -5,7 +5,9 @@
 package view;
 
 import controller.AgendaController;
+
 import java.sql.SQLException;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,7 +30,7 @@ public class Agenda extends javax.swing.JFrame {
     public Agenda() throws SQLException {
         initComponents();
         this.controller = new AgendaController(this);
-//        Banco.inicia();
+
         iniciar();
         
     }
@@ -54,6 +56,8 @@ public class Agenda extends javax.swing.JFrame {
         LabelValor = new javax.swing.JLabel();
         TextValor = new javax.swing.JTextField();
         TextServico = new javax.swing.JComboBox<>();
+        LabelBarbeiro = new javax.swing.JLabel();
+        TextBarbeiro = new javax.swing.JComboBox<>();
         LabelCliente = new javax.swing.JLabel();
         LabelServico = new javax.swing.JLabel();
         TextCliente = new javax.swing.JComboBox<>();
@@ -69,18 +73,26 @@ public class Agenda extends javax.swing.JFrame {
 
         TableAgendamentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Id", "Cliente", "Serviço", "Valor", "Data", "Hora", "Observação"
+                "Id", "Barbeiro", "Cliente", "Serviço", "Valor", "Data", "Hora", "Observação"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(TableAgendamentos);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 450, 1120, 170));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 460, 1120, 170));
 
         TextFormatedHora.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
         getContentPane().add(TextFormatedHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 380, 280, 40));
@@ -116,14 +128,6 @@ public class Agenda extends javax.swing.JFrame {
         LabelValor.setForeground(new java.awt.Color(255, 255, 255));
         LabelValor.setText("Valor R$");
         getContentPane().add(LabelValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, -1, -1));
-
-        TextValor.setText("0");
-        TextValor.setToolTipText("");
-        TextValor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TextValorActionPerformed(evt);
-            }
-        });
         getContentPane().add(TextValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 280, 40));
 
         TextServico.addItemListener(new java.awt.event.ItemListener() {
@@ -136,26 +140,42 @@ public class Agenda extends javax.swing.JFrame {
                 TextServicoActionPerformed(evt);
             }
         });
-        getContentPane().add(TextServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, 280, 40));
+        getContentPane().add(TextServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 280, 40));
+
+        LabelBarbeiro.setForeground(new java.awt.Color(255, 255, 255));
+        LabelBarbeiro.setText("Barbeiro");
+        getContentPane().add(LabelBarbeiro, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, -1, -1));
+
+        TextBarbeiro.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                TextBarbeiroItemStateChanged(evt);
+            }
+        });
+        TextBarbeiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextBarbeiroActionPerformed(evt);
+            }
+        });
+        getContentPane().add(TextBarbeiro, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 280, 40));
 
         LabelCliente.setForeground(new java.awt.Color(255, 255, 255));
         LabelCliente.setText("Cliente");
-        getContentPane().add(LabelCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, -1, -1));
+        getContentPane().add(LabelCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, -1, -1));
 
         LabelServico.setForeground(new java.awt.Color(255, 255, 255));
         LabelServico.setText("Servico");
-        getContentPane().add(LabelServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, -1, -1));
+        getContentPane().add(LabelServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, -1, -1));
 
         TextCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TextClienteActionPerformed(evt);
             }
         });
-        getContentPane().add(TextCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 280, 40));
+        getContentPane().add(TextCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 280, 40));
 
         LabelId.setForeground(new java.awt.Color(255, 255, 255));
         LabelId.setText("Id");
-        getContentPane().add(LabelId, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, -1, -1));
+        getContentPane().add(LabelId, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, -1, -1));
 
         TextId.setEditable(false);
         TextId.setText("0");
@@ -165,7 +185,7 @@ public class Agenda extends javax.swing.JFrame {
                 TextIdActionPerformed(evt);
             }
         });
-        getContentPane().add(TextId, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 280, 40));
+        getContentPane().add(TextId, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 280, 40));
 
         LabelObservacao.setForeground(new java.awt.Color(255, 255, 255));
         LabelObservacao.setText("Observação");
@@ -195,10 +215,6 @@ public class Agenda extends javax.swing.JFrame {
         
     }//GEN-LAST:event_ButtonAgendarActionPerformed
 
-    private void TextValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextValorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TextValorActionPerformed
-
     private void TextIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextIdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TextIdActionPerformed
@@ -218,6 +234,14 @@ public class Agenda extends javax.swing.JFrame {
             Logger.getLogger(Agenda.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_TextServicoItemStateChanged
+
+    private void TextBarbeiroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TextBarbeiroItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextBarbeiroItemStateChanged
+
+    private void TextBarbeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextBarbeiroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextBarbeiroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -262,6 +286,7 @@ public class Agenda extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonAgendar;
     private javax.swing.JLabel LabelAgenda;
+    private javax.swing.JLabel LabelBarbeiro;
     private javax.swing.JLabel LabelCliente;
     private javax.swing.JLabel LabelData;
     private javax.swing.JLabel LabelHora;
@@ -272,6 +297,7 @@ public class Agenda extends javax.swing.JFrame {
     private javax.swing.JLabel LblImagemAgenda;
     private javax.swing.JLabel LblMolduraAgenda;
     private javax.swing.JTable TableAgendamentos;
+    private javax.swing.JComboBox<String> TextBarbeiro;
     private javax.swing.JComboBox<String> TextCliente;
     private javax.swing.JFormattedTextField TextFormatedData;
     private javax.swing.JFormattedTextField TextFormatedHora;
@@ -288,7 +314,10 @@ public class Agenda extends javax.swing.JFrame {
         this.controller.atualizaTabela();
         this.controller.atualizaCliente();
         this.controller.atualizaServico();
+        this.controller.atualizaBarbeiro();       
         this.controller.atualizaValor();
+        this.controller.atualizaAgendamento();
+        
         
     }
 
@@ -316,6 +345,14 @@ public class Agenda extends javax.swing.JFrame {
         this.TextServico = TextServico;
     }
 
+    public JComboBox<String> getTextBarbeiro() {
+        return TextBarbeiro;
+    }
+
+    public void setTextBarbeiro(JComboBox<String> TextBarbeiro) {
+        this.TextBarbeiro = TextBarbeiro;
+    }
+
     public JTextField getTextValor() {
         return TextValor;
     }
@@ -323,6 +360,10 @@ public class Agenda extends javax.swing.JFrame {
     public void setTextValor(JTextField TextValor) {
         this.TextValor = TextValor;
     }
+
+   
+
+   
 
     public JFormattedTextField getTextFormatedData() {
         return TextFormatedData;
@@ -355,6 +396,8 @@ public class Agenda extends javax.swing.JFrame {
     public void setTextObservacao(JTextArea TextObservacao) {
         this.TextObservacao = TextObservacao;
     }
+    
+   
     
     
     

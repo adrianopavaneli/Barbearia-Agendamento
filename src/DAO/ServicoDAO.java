@@ -61,7 +61,7 @@ public class ServicoDAO {
             
     }
     public ArrayList<Servico> selectAll() throws SQLException{
-         String sql = "select * from servico";
+         String sql = "select * from servico order by descricao";
         PreparedStatement statement = connection.prepareStatement(sql);
         return pesquisa(statement);        
         

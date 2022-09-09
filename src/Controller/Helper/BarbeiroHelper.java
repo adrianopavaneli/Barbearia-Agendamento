@@ -5,21 +5,20 @@
 package controller.Helper;
 
 import java.util.ArrayList;
-
 import javax.swing.table.DefaultTableModel;
+import model.Barbeiro;
 
+import view.CadastroBarbeiroView;
 
-import model.Servico;
-import view.CadastroServicoView;
 
 /**
  *
  * @author Adriano Pavaneli
  */
-public class ServicoHelper implements IHelper{
-    private final CadastroServicoView view;
+public class BarbeiroHelper implements IHelper {
+private final CadastroBarbeiroView view;
     
-    public ServicoHelper(CadastroServicoView view) {
+    public BarbeiroHelper(CadastroBarbeiroView view) {
         this.view = view;
     }
 
@@ -27,27 +26,23 @@ public class ServicoHelper implements IHelper{
     public Object obterModelo() {
         String idString = view.getTxtCadId().getText();
         int id = Integer.parseInt(idString);
-        String descricao = view.getTxtCadDescricao().getText();
+        String nome = view.getTxtCadNome().getText();
         
-        String valorString = view.getTxtCadValor().getText();
-        double valor = Double.parseDouble(valorString);
+             
         
-        
-        
-      Servico servico = new Servico(id, descricao, valor);
-      return servico;
+      Barbeiro barbeiro = new Barbeiro(id, nome);
+      return barbeiro;
     }
-    public void preencherTabela(ArrayList<Servico> servicos) {
-        DefaultTableModel tableModel = (DefaultTableModel) view.getTableServicos().getModel();
+    public void preencherTabela(ArrayList<Barbeiro> barbeiros) {
+        DefaultTableModel tableModel = (DefaultTableModel) view.getTableBarbeiro().getModel();
         tableModel.setNumRows(0);
         
         //Percorrer a lista preenchendo a tabela
-        for (Servico servico : servicos) {
+        for (Barbeiro barbeiro : barbeiros) {
             tableModel.addRow(
             new Object[]{
-             servico.getId(),
-             servico.getDescricao(),
-             servico.getValor()
+             barbeiro.getId(),
+             barbeiro.getNome() 
              
              
              
@@ -57,8 +52,8 @@ public class ServicoHelper implements IHelper{
     @Override
     public void limpaTela() {
         view.getTxtCadId().setText("0");
-       view.getTxtCadDescricao().setText("");
-       view.getTxtCadValor().setText("");
+       view.getTxtCadNome().setText("");
+       
        
     }
     

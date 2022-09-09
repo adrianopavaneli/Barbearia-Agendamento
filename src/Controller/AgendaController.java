@@ -5,22 +5,20 @@
 package controller;
 
 import controller.Helper.AgendaHelper;
-import controller.Helper.IHelper;
+
 import dao.AgendamentoDAO;
+import dao.BarbeiroDAO;
 import dao.ClienteDAO;
 import dao.Conexao;
 import dao.ServicoDAO;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.Agendamento;
 import model.Cliente;
-
 import model.Servico;
 import java.util.ArrayList;
 import java.util.List;
-import model.Usuario;
+import model.Barbeiro;
 import view.Agenda;
 
 /**
@@ -36,6 +34,12 @@ public class AgendaController {
     public AgendaController(Agenda view) {
         this.view = view;
         this.helper = new AgendaHelper(view);
+    }
+    
+    public void atualizaAgendamento() throws SQLException{
+        Connection conexao = new Conexao().getConnection();
+        AgendamentoDAO agendamentoDao = new AgendamentoDAO(conexao);
+        agendamentoDao.atualizaDataAgendamento();
     }
     
     public void atualizaTabela() throws SQLException{
@@ -71,6 +75,18 @@ public class AgendaController {
         
         
     }
+     
+    public void atualizaBarbeiro() throws SQLException{
+        //buscar banco de dados
+        Connection conexao = new Conexao().getConnection();
+       BarbeiroDAO barbeiroDao = new BarbeiroDAO(conexao);
+        ArrayList<Barbeiro> barbeiros = barbeiroDao.selectAll();
+//        //exibir barbeiros nos combobox
+        
+        helper.preencherBarbeiro(barbeiros);
+        
+        
+    } 
      public void atualizaValor() throws SQLException{
          Connection conexao = new Conexao().getConnection();
          ServicoDAO servicoDao = new ServicoDAO(conexao);

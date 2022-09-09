@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
+import model.Barbeiro;
 import view.Agenda;
 
 /**
@@ -37,6 +38,7 @@ public class AgendaHelper implements IHelper{
             tableModel.addRow(
             new Object[]{
              agendamento.getId(),
+             agendamento.getBarbeiro().getNome(),
              agendamento.getCliente().getNome(),
              agendamento.getServico().getDescricao(),
              agendamento.getValor(),
@@ -65,6 +67,15 @@ public class AgendaHelper implements IHelper{
  
       
     }
+    
+    public void preencherBarbeiro(ArrayList<Barbeiro> barbeiros) {
+       DefaultComboBoxModel comboBoxModel = (DefaultComboBoxModel) view.getTextBarbeiro().getModel();
+        for(Barbeiro barbeiro : barbeiros) {
+            comboBoxModel.addElement(barbeiro);
+        }
+ 
+      
+    }
     public Cliente obterCliente() {
        return (Cliente)view.getTextCliente().getSelectedItem();
     }
@@ -73,6 +84,9 @@ public class AgendaHelper implements IHelper{
        return (Servico)view.getTextServico().getSelectedItem();
     }
 
+    public Barbeiro obterBarbeiro() {
+       return (Barbeiro)view.getTextBarbeiro().getSelectedItem();
+    }
     public void setarValor(double valor) {
         view.getTextValor().setText(valor + "");
     }
@@ -83,6 +97,7 @@ public class AgendaHelper implements IHelper{
         int id = Integer.parseInt(idString);
         Cliente cliente = obterCliente();
         Servico servico = obterServico();
+        Barbeiro barbeiro = obterBarbeiro();
         String valorString = view.getTextValor().getText();
         double valor = Double.parseDouble(valorString);
         String data = view.getTextFormatedData().getText();
@@ -92,7 +107,7 @@ public class AgendaHelper implements IHelper{
         String observacao = view.getTextObservacao().getText();
         
         
-      Agendamento agendamento = new Agendamento(id, cliente, servico, valor, datapronta, observacao);
+      Agendamento agendamento = new Agendamento(id, cliente, servico, barbeiro,valor, datapronta, observacao);
       return agendamento;
     }
 
